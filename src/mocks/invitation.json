@@ -1,0 +1,30 @@
+{
+  "id": "inv_001",
+  "theme": {
+    "primaryColor": "#D4AF37", 
+    "fontFamily": "sans-serif"
+  },
+  "music": {
+    "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "autoplay": true
+  },
+  "blocks": [
+    {
+      "_type": "coverBlock",
+      "title": "Ethereal Union",
+      "subtitle": "SAVE THE DATE",
+      "backgroundImage": "https://lh3.googleusercontent.com/aida/AP1WRLsomXEthfvsJTzQya42_12356PrRddcBvpZKCgCLmSYprq2QjAdoEqp7ivMY0v9d_GHidyONBxVtpzHMxQqrJIHxqDPHsm9YPuvtiiK2CcmoDhSr10z3nesSXLrrLshGVZPQwK0BMjdZV2LopYgoJLBthkACXLm9z4Z2-nzXv49GK4ejP0638Tz_bhtWte2pXoy9oQGSxXOLZX49-nVTo2oW7y-ReHmEJypS9E3iRS5zxnGv6GPMkZINBY",
+      "scrollLabel": "Presione para abrir"
+    },
+    {
+      "_type": "heroBlock",
+      "title": "Carlos & Ana",
+      "subtitle": "Acompáñanos a celebrar nuestro gran día",
+      "date": "2026-10-15T18:00:00",
+      "backgroundImage": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop",
+      "effects": {
+        "glowEffect": true
+      }
+    }
+  ]
+}
