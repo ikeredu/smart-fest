@@ -6,8 +6,15 @@
 }
 
 @theme {
-  --font-sans: var(--font-plus-jakarta), sans-serif;
+  --font-sans: var(--font-manrope), sans-serif;
   --font-serif: var(--font-playfair), serif;
+
+  --color-cranberry: #734141;
+  --color-artichoke: #586357;
+  --color-potatoes: #fff2e6;
+  --color-greenbean: #052102;
+  --color-cabernet: #3D0000;
+  --color-mulledwine: #280D08;
 }
 
 body {
@@ -126,7 +133,7 @@ body {
 }
 
 .hero-overlay {
-  background: radial-gradient(circle, rgba(252, 248, 248, 0.2) 0%, rgba(252, 248, 248, 0.6) 100%);
+  background: linear-gradient(to bottom, rgba(115, 65, 65, 0.15) 0%, rgba(88, 99, 87, 0.25) 100%);
 }
 
 .pulse-soft {
@@ -136,20 +143,28 @@ body {
 @keyframes pulse-soft {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 0 0 rgba(115, 65, 65, 0.3);
   }
   70% {
-    transform: scale(1.04);
-    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(115, 65, 65, 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    box-shadow: 0 0 0 0 rgba(115, 65, 65, 0);
   }
 }
 
 .text-shadow-gold {
   text-shadow: 0 2px 4px rgba(115, 92, 0, 0.15);
+}
+
+.text-shadow-custom {
+  text-shadow: 0 2px 4px rgba(115, 65, 65, 0.2);
+}
+
+.bg-vignette {
+  background: radial-gradient(circle, rgba(61, 0, 0, 0.05) 0%, rgba(40, 13, 8, 0.3) 100%);
 }
 
 

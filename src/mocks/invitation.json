@@ -17,14 +17,11 @@
       "scrollLabel": "Presione para abrir"
     },
     {
-      "_type": "heroBlock",
-      "title": "Carlos & Ana",
-      "subtitle": "Acompáñanos a celebrar nuestro gran día",
-      "date": "2026-10-15T18:00:00",
-      "backgroundImage": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop",
-      "effects": {
-        "glowEffect": true
-      }
+      "_type": "storyBlock",
+      "label": "Nuestra Historia",
+      "date": "2025-07-12T18:00:00",
+      "location": "Catedral Metropolitana",
+      "backgroundImage": "https://lh3.googleusercontent.com/aida/AP1WRLu8T54Tcgqpq62It8jC6-DkHe2oyE7q3bI3UIlRilK5Pw0J59EzhG5hJVp2uK2asU0JcQmMqPIsCDKSkwovcFE_X5sIpVO1OfPph4GJhAhhBTErNSlYKnxh1X0O1kKe3-LWQ9LRYK2eyGt21nea4-tD0r0sl173i07jbqbKLlej_AXqekZYfUDMVp_0IEb-kKN-HO_yHmMHLU8Kj5irwqioH_r07c0hHLPEK8PbHzVc5FRWN29HeRywbJ4"
     }
   ]
 }

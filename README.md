@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌟 Smart Fest
 
-## Getting Started
+**Smart Fest** es una plataforma open-source de vanguardia para la creación y renderizado de **invitaciones digitales interactivas**. El sistema está diseñado bajo una arquitectura modular de **Configuration-Driven UI (CDUI)** y **Component-Driven Design (CDD)**, emulando la filosofía de piezas de Lego.
 
-First, run the development server:
+Con Smart Fest, el contenido, orden y comportamiento de cada invitación se definen a través de un archivo de configuración JSON. Esto permite desacoplar completamente la lógica visual de la de datos, facilitando una escalabilidad e iteración excepcionales.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Arquitectura: El Concepto "Lego" (CDUI)
+
+La interfaz se compone de bloques autónomos que se encuadran automáticamente en pantalla utilizando **CSS Scroll Snapping** de alta precisión.
+
+```mermaid
+graph TD
+    JSON[invitation.json Config] -->|Esquema de Validación| Zod[Zod Schemas blocks.ts]
+    Zod -->|Inferencia de Tipos| TS[TypeScript Contracts]
+    JSON -->|Lectura Dinámica| Engine[Dynamic Engine page.tsx]
+    Engine -->|Mapeo switch _type| Render[Renderizado de Componentes React]
+    Render -->|CoverBlock| CB[Portada e Inserción de Audio]
+    Render -->|StoryBlock| SB[Historia, Parallax e Información]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1.  **Desacoplamiento Absoluto:** Cada sección (Portada, Historia, etc.) es un bloque modular independiente, agnóstico de dónde se posicione.
+2.  **Validación Robusta:** Usamos **Zod** para definir esquemas y contratos de TypeScript automáticos en tiempo de ejecución. Si el JSON de configuración no es correcto, la aplicación previene fallas de renderizado.
+3.  **Transiciones Naturales:** Habilitamos un sistema de snapping responsivo que fuerza a cada sección a abarcar exactamente el 100% del viewport (`h-screen`), interactuando de forma sutil y orgánica con el scroll.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Stack Tecnológico
 
-## Learn More
+Elegimos tecnologías de punta para garantizar un rendimiento óptimo y una experiencia de desarrollo moderna:
 
-To learn more about Next.js, take a look at the following resources:
+*   **Framework:** [Next.js v16.2.6](https://nextjs.org/) (App Router, optimización de fuentes nativas y compilación de vanguardia).
+*   **Biblioteca de UI:** [React v19.2.4](https://react.dev/).
+*   **Estilos:** [Tailwind CSS v4.0.0](https://tailwindcss.com/) (soporte de variables nativas en CSS y animaciones fluidas).
+*   **Tipografías:** `Playfair Display` (serif clásico editorial) y `Manrope` (sans-serif limpio).
+*   **Validación:** [Zod v4.4.3](https://zod.dev/).
+*   **Clases Dinámicas:** [clsx](https://github.com/lukeed/clsx) & [tailwind-merge](https://github.com/dcastil/tailwind-merge).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Características del MVP Actual
 
-## Deploy on Vercel
+### ✉️ Portada de Bienvenida (`CoverBlock`)
+*   Simula la recepción de un sobre físico de invitación.
+*   **Desplazamiento Sutil:** Botón de apertura con un scroll programático gradual (`parentContainer.scrollTo`) que se alinea suavemente con la segunda sección.
+*   **Widget de Música Inteligente:** Un reproductor de música glassmorphic anclado localmente al Cover que sube y se oculta con este al hacer scroll. Evita bloqueos de reproducción automática de los navegadores (*autoplay bypass*) escuchando la primera interacción del usuario.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📸 Sección de Historia (`StoryBlock`)
+*   **Efecto Parallax:** La foto de los novios de fondo se desplaza levemente en 2D al seguir el cursor del usuario en dispositivos de escritorio.
+*   **Tarjeta de Información:** Tarjeta glassmorphic con diseño flotante y desenfoque que traduce la fecha/hora del JSON a lenguaje natural en español (ej. `"Sábado, 12 de Julio de 2025"`).
+*   **Capas de Filtro:** Capas de viñeta rústica y degradado de color vino (`mulledwine`), con una textura sutil superpuesta de papel rugoso para brindar calidez.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🗺️ Roadmap de Colaboración
+
+Queremos expandir Smart Fest para convertirlo en una solución integral de gestión de eventos. Los siguientes módulos están planificados:
+
+*   `[ ]` **RSVP FormBlock:** Formulario de confirmación de asistencia en tiempo real conectado a base de datos (con control de alergias, invitados adicionales y canciones sugeridas).
+*   `[ ]` **LocationBlock:** Mapas dinámicos (Google Maps / Waze) y botones de agenda (Google Calendar, iCal).
+*   `[ ]` **Gestión de Invitados (Admin Dashboard):** Panel administrativo para los organizadores donde puedan ver confirmaciones y estadísticas del evento.
+*   `[ ]` **IA de Redacción y Ubicación:** Integración de Inteligencia Artificial para redactar frases emotivas personalizadas y optimizar la acomodación de invitados en mesas.
+
+---
+
+## 🛠️ Guía Rápida de Inicio
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/ikeredu/smart-fest.git
+    cd smart-fest
+    ```
+
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+
+3.  **Iniciar el entorno de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Abrir el navegador:**
+    Visita [http://localhost:3000](http://localhost:3000) para ver la invitación interactiva en tiempo real.
+
+---
+
+## 🤝 Colaboración
+
+¡Las contribuciones son bienvenidas! Consulta nuestro archivo [CONTRIBUTING.md](./CONTRIBUTING.md) para conocer las reglas de código, arquitectura de carpetas y cómo comenzar a añadir tus propios bloques.

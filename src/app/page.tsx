@@ -1,6 +1,5 @@
-import HeroBlock from '@/blocks/HeroBlock';
 import CoverBlock from '@/blocks/CoverBlock';
-import MusicWidget from '@/components/MusicWidget';
+import StoryBlock from '@/blocks/StoryBlock';
 import invitationData from '@/mocks/invitation.json';
 import { AnyBlockData } from '@/types/blocks';
 
@@ -11,20 +10,21 @@ export default function Home() {
   const musicConfig = invitationData.music;
 
   return (
-    <main className="min-h-screen bg-white relative">
-      {/* 1. Widget de Música Global si está configurado en el JSON */}
-      {musicConfig?.url && (
-        <MusicWidget url={musicConfig.url} autoplay={musicConfig.autoplay} />
-      )}
-
-      {/* 2. Motor de Renderizado Dinámico (CDUI) */}
+    <main className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-white relative">
+      {/* Motor de Renderizado Dinámico (CDUI) */}
       {blocks.map((block, index) => {
         switch (block._type) {
           case 'coverBlock':
-            return <CoverBlock key={index} {...block} />;
+            return (
+              <CoverBlock 
+                key={index} 
+                {...block} 
+                music={musicConfig?.url ? { url: musicConfig.url, autoplay: musicConfig.autoplay } : undefined} 
+              />
+            );
             
-          case 'heroBlock':
-            return <HeroBlock key={index} {...block} />;
+          case 'storyBlock':
+            return <StoryBlock key={index} {...block} />;
           
           default:
             // Si viene un bloque desconocido, lo omitimos con gracia

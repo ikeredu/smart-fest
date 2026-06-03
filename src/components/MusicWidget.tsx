@@ -106,7 +106,7 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="fixed top-6 right-6 z-50 select-none">
+    <div className="absolute top-6 right-6 z-50 select-none">
       {/* Elemento de audio nativo oculto */}
       <audio 
         ref={audioRef} 
@@ -118,25 +118,25 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
       />
 
       {/* Reproductor Estilo Glassmorphic Tarjeta de Stitch */}
-      <div className="glass-card p-4 rounded-2xl flex flex-col gap-4 shadow-2xl bg-white/30 backdrop-blur-xl border border-white/40 w-[180px] hover:bg-white/45 transition-all duration-500">
+      <div className="glass-card p-4 rounded-2xl flex flex-col gap-4 shadow-2xl bg-white/30 backdrop-blur-xl border border-potatoes/30 w-[180px] hover:bg-white/45 transition-all duration-500">
         
         {/* Fila Superior: Icono de nota + Metadatos */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center border border-[#D4AF37]/20 shadow-sm animate-pulse-slow">
+          <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-cranberry/10 flex items-center justify-center border border-cranberry/20 shadow-sm animate-pulse-slow">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 24 24" 
               fill="currentColor" 
-              className="w-5 h-5 text-[#D4AF37]"
+              className="w-5 h-5 text-cranberry"
             >
               <path d="M13.5 3.75a.75.75 0 0 0-1.5 0v11.25H6a3.75 3.75 0 1 0 0 7.5h6a3.75 3.75 0 0 0 3.75-3.75V3.75Z" />
             </svg>
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="font-serif text-[12px] text-[#5d5f5f] font-bold truncate leading-tight">
+            <span className="font-body-md text-[12px] text-cranberry truncate leading-tight font-semibold">
               Ethereal Melody
             </span>
-            <span className="font-sans text-[8px] text-[#1c1b1b]/60 font-semibold tracking-wider truncate uppercase">
+            <span className="font-label-md text-[8px] text-artichoke tracking-wider truncate uppercase">
               Wedding Ensemble
             </span>
           </div>
@@ -147,7 +147,7 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
           {/* Retroceder */}
           <button 
             onClick={skipBackward}
-            className="text-[#D4AF37]/50 hover:text-[#D4AF37] transition-colors focus:outline-none cursor-pointer group"
+            className="text-cranberry/50 hover:text-cranberry transition-colors focus:outline-none cursor-pointer group"
             title="Retroceder 10s"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 transition-transform group-hover:scale-110">
@@ -159,17 +159,17 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
           <button 
             onClick={togglePlay}
             className={cn(
-              "w-8 h-8 flex items-center justify-center rounded-full bg-white/60 text-[#D4AF37] hover:bg-white transition-all shadow-sm focus:outline-none cursor-pointer",
+              "w-8 h-8 flex items-center justify-center rounded-full bg-potatoes/60 text-cranberry hover:bg-white transition-all shadow-sm focus:outline-none cursor-pointer",
               !isPlaying && "pulse-soft"
             )}
             title={isPlaying ? "Pausar" : "Reproducir"}
           >
             {isPlaying ? (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-[#D4AF37]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-cranberry">
                 <path fillRule="evenodd" d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0a.75.75 0 0 1 .75-.75H16.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z" clipRule="evenodd" />
               </svg>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 ml-0.5 text-[#D4AF37]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 ml-0.5 text-cranberry">
                 <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
               </svg>
             )}
@@ -178,7 +178,7 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
           {/* Adelantar */}
           <button 
             onClick={skipForward}
-            className="text-[#D4AF37]/50 hover:text-[#D4AF37] transition-colors focus:outline-none cursor-pointer group"
+            className="text-cranberry/50 hover:text-cranberry transition-colors focus:outline-none cursor-pointer group"
             title="Adelantar 10s"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 transition-transform group-hover:scale-110">
@@ -189,13 +189,13 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
 
         {/* Fila Inferior: Progreso Real */}
         <div className="flex flex-col gap-1.5">
-          <div className="w-full h-0.5 bg-[#1c1b1b]/5 rounded-full overflow-hidden">
+          <div className="w-full h-0.5 bg-artichoke/20 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-[#D4AF37]/70 rounded-full transition-all duration-300"
+              className="h-full bg-cranberry/60 rounded-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
-          <div className="flex justify-between font-sans text-[8px] text-[#1c1b1b]/40 font-semibold uppercase tracking-wider">
+          <div className="flex justify-between font-sans text-[8px] text-artichoke/60 font-semibold uppercase tracking-wider">
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(duration || 200)}</span>
           </div>
