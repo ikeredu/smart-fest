@@ -52,7 +52,7 @@ export default function EventDetailsBlock({ title, label, date, location, backgr
 
   return (
     <section 
-      className="relative w-full h-screen flex flex-col justify-between items-center p-6 md:p-12 overflow-hidden snap-start select-none bg-potatoes"
+      className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center p-6 md:p-12 overflow-hidden snap-start select-none bg-potatoes"
     >
       {/* Imagen de fondo del evento con Parallax */}
       {backgroundImage && (

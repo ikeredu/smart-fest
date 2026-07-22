@@ -190,4 +190,29 @@ body {
   text-shadow: 0 2px 4px rgba(115, 65, 65, 0.2);
 }
 
+/* --- Animación de Lluvia de Pétalos y Flores --- */
+@keyframes petal-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) rotate(0deg) scale(0.7);
+  }
+  15% {
+    opacity: 0.95;
+  }
+  75% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(110vh) rotate(360deg) scale(1.15);
+  }
+}
 
+@keyframes petal-sway {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(38px);
+  }
+}

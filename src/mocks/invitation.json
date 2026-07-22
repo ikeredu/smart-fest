@@ -13,15 +13,15 @@
       "_type": "coverBlock",
       "title": "David & Alejandra",
       "subtitle": "",
-      "backgroundImage": "https://lh3.googleusercontent.com/aida/AP1WRLsomXEthfvsJTzQya42_12356PrRddcBvpZKCgCLmSYprq2QjAdoEqp7ivMY0v9d_GHidyONBxVtpzHMxQqrJIHxqDPHsm9YPuvtiiK2CcmoDhSr10z3nesSXLrrLshGVZPQwK0BMjdZV2LopYgoJLBthkACXLm9z4Z2-nzXv49GK4ejP0638Tz_bhtWte2pXoy9oQGSxXOLZX49-nVTo2oW7y-ReHmEJypS9E3iRS5zxnGv6GPMkZINBY",
+      "backgroundImage": "",
       "scrollLabel": "Presione para abrir"
     },
     {
       "_type": "heroBlock",
-      "title": "Carlos & Ana",
+      "title": "David & Alejandra",
       "subtitle": "Acompáñanos a celebrar nuestro gran día",
-      "date": "2026-10-15T18:00:00",
-      "backgroundImage": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop",
+      "date": "2026-09-15T18:00:00",
+      "backgroundImage": "/images/foto_novios.avif",
       "effects": {
         "glowEffect": true
       }

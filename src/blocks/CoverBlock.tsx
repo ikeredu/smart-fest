@@ -2,14 +2,53 @@
 
 import React from 'react';
 import { CoverBlockData } from '../types/blocks';
+import MusicWidget from '../components/MusicWidget';
 
-export default function CoverBlock({ title, subtitle, scrollLabel }: CoverBlockData) {
+interface CoverBlockProps extends CoverBlockData {
+  musicUrl?: string;
+  musicAutoplay?: boolean;
+  onOpenCover?: () => void;
+}
+
+export default function CoverBlock({ 
+  title, 
+  subtitle, 
+  scrollLabel, 
+  musicUrl, 
+  musicAutoplay,
+  onOpenCover 
+}: CoverBlockProps) {
   const handleScrollDown = () => {
+    // 1. Disparar el evento de lluvia botánica global a nivel de página
+    if (onOpenCover) {
+      onOpenCover();
+    }
+
     if (typeof window !== 'undefined') {
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth',
-      });
+      // 2. Desplazamiento cinematográfico suave con curva easeInOutCubic (1.2s)
+      const targetPosition = window.innerHeight;
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      const duration = 1200; // 1.2 segundos
+      let startTimestamp: number | null = null;
+
+      const easeInOutCubic = (t: number) => {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      };
+
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easedProgress = easeInOutCubic(progress);
+
+        window.scrollTo(0, startPosition + distance * easedProgress);
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+
+      window.requestAnimationFrame(step);
     }
   };
 
@@ -19,9 +58,14 @@ export default function CoverBlock({ title, subtitle, scrollLabel }: CoverBlockD
   const lastWord = words[words.length - 1];
 
   return (
-    <section
-      className="relative flex flex-col items-center justify-center w-full h-screen text-center overflow-hidden select-none bg-black"
+    <section 
+      className="relative flex flex-col items-center justify-center w-full h-screen h-[100dvh] text-center overflow-hidden select-none bg-black transform translate-x-0"
     >
+      {/* Widget de Música Embebido en la Portada (fijo en top-right de este bloque) */}
+      {musicUrl && (
+        <MusicWidget url={musicUrl} autoplay={musicAutoplay} />
+      )}
+      
       {/* Video de Fondo Directo */}
       <div className="absolute inset-0 z-0">
         <video

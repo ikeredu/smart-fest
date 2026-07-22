@@ -27,6 +27,18 @@ export const CoverBlockSchema = z.object({
 
 export type CoverBlockData = z.infer<typeof CoverBlockSchema>;
 
+// 4. Definimos el esquema para el bloque de Detalles de Evento (EventDetails)
+export const EventDetailsBlockSchema = z.object({
+  _type: z.literal('eventDetailsBlock'),
+  title: z.string(),
+  label: z.string().optional(),
+  date: z.string(),
+  location: z.string(),
+  backgroundImage: z.string().url().optional(),
+});
+
+export type EventDetailsBlockData = z.infer<typeof EventDetailsBlockSchema>;
+
 // Conforme agreguemos más bloques (Ubicación, Formulario), los uniremos aquí:
 export const AnyBlockSchema = z.discriminatedUnion('_type', [
   HeroBlockSchema,
