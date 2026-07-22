@@ -216,3 +216,29 @@ body {
     transform: translateX(38px);
   }
 }
+
+/* --- Clases Estandarizadas de Cristal Templado --- */
+.glass-dark {
+  background-color: rgba(61, 0, 0, 0.40); /* Cabernet al 40% */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 242, 230, 0.30); /* Potatoes al 30% */
+}
+
+.glass-crystalline {
+  background-color: rgba(255, 255, 255, 0.30); /* 30% de opacidad cristalina */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.45); /* Bisel de luz brillante */
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+}
+
+.glass-botanical-dark {
+  background-color: rgba(29, 38, 28, 0.65); /* Verde Artichoke/Greenbean oscurecido al 65% */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 242, 230, 0.35); /* Bisel de luz Mashed Potatoes */
+  box-shadow: inset 0 1px 1px 0 rgba(255, 242, 230, 0.25), 0 20px 40px -15px rgba(0, 0, 0, 0.45);
+}
+
+

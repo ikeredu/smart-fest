@@ -39,10 +39,43 @@ export const EventDetailsBlockSchema = z.object({
 
 export type EventDetailsBlockData = z.infer<typeof EventDetailsBlockSchema>;
 
+// 5. Definimos el esquema para el bloque de Presentación de Padres y Novios (Parents)
+export const ParentsBlockSchema = z.object({
+  _type: z.literal('parentsBlock'),
+  headerLabel: z.string().optional().default('Nuestra Unión'),
+  brideParents: z.object({
+    label: z.string().default('Padres de la Novia'),
+    father: z.string(),
+    mother: z.string(),
+  }),
+  groomParents: z.object({
+    label: z.string().default('Padres del Novio'),
+    father: z.string(),
+    mother: z.string(),
+  }),
+  brideFullName: z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+  }),
+  groomFullName: z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+  }),
+  invitationMessage: z.string(),
+  ctaButtonText: z.string().optional(),
+  yearText: z.string().optional().default('Dos Mil Veintiséis'),
+  backgroundImage: z.string().optional(),
+});
+
+export type ParentsBlockData = z.infer<typeof ParentsBlockSchema>;
+
 // Conforme agreguemos más bloques (Ubicación, Formulario), los uniremos aquí:
 export const AnyBlockSchema = z.discriminatedUnion('_type', [
   HeroBlockSchema,
   CoverBlockSchema,
+  EventDetailsBlockSchema,
+  ParentsBlockSchema,
 ]);
 
 export type AnyBlockData = z.infer<typeof AnyBlockSchema>;
+

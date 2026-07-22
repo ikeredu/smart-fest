@@ -36,27 +36,47 @@ export default function PetalShower({ isActive, onComplete }: PetalShowerProps) 
       return;
     }
 
-    // Generar 22 partículas botánicas con las imágenes PNG transparentes reales
-    const generatedParticles: PetalParticle[] = Array.from({ length: 22 }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 92 + 4, // 4% a 96%
-      size: Math.floor(Math.random() * 26) + 32, // entre 32px y 58px
-      duration: Math.random() * 2.0 + 4.5, // Caída pausada y elegante entre 4.5s y 6.5s
-      delay: Math.random() * 0.6, // 0s a 0.6s
-      swayDuration: Math.random() * 1.5 + 3.0, // oscilación suave entre 3.0s y 4.5s
-      src: PETAL_PNG_IMAGES[i % PETAL_PNG_IMAGES.length],
-      blur: i % 6 === 0, // desenfoque suave de profundidad en 15% de partículas
-      opacity: Math.random() * 0.25 + 0.75,
-      rotation: Math.floor(Math.random() * 360),
-    }));
+    // Generar 44 partículas organizadas en 3 ráfagas/olas de viento consecutivas
+    const wave1Count = 16;
+    const wave2Count = 16;
+    const wave3Count = 12;
+    const totalCount = wave1Count + wave2Count + wave3Count;
+
+    const generatedParticles: PetalParticle[] = Array.from({ length: totalCount }).map((_, i) => {
+      let delay = 0;
+
+      if (i < wave1Count) {
+        // Ráfaga 1 (Inicial): retraso entre 0.0s y 0.8s
+        delay = Math.random() * 0.8;
+      } else if (i < wave1Count + wave2Count) {
+        // Ráfaga 2 (Segunda ola): retraso entre 1.6s y 2.4s
+        delay = Math.random() * 0.8 + 1.6;
+      } else {
+        // Ráfaga 3 (Tercera ola): retraso entre 3.2s y 4.0s
+        delay = Math.random() * 0.8 + 3.2;
+      }
+
+      return {
+        id: i,
+        left: Math.random() * 96 + 2, // Amplia dispersión entre 2% y 98%
+        size: Math.floor(Math.random() * 26) + 32, // entre 32px y 58px
+        duration: Math.random() * 1.8 + 4.2, // Caída pausada entre 4.2s y 6.0s
+        delay,
+        swayDuration: Math.random() * 1.5 + 3.0, // oscilación suave entre 3.0s y 4.5s
+        src: PETAL_PNG_IMAGES[i % PETAL_PNG_IMAGES.length],
+        blur: i % 6 === 0, // desenfoque suave de profundidad en ~16% de partículas
+        opacity: Math.random() * 0.25 + 0.75,
+        rotation: Math.floor(Math.random() * 360),
+      };
+    });
 
     setParticles(generatedParticles);
 
-    // Limpieza tras completar la caída (7s)
+    // Limpieza tras completar las 3 ráfagas de viento (8.5s)
     const timer = setTimeout(() => {
       setParticles([]);
       if (onComplete) onComplete();
-    }, 7000);
+    }, 8500);
 
     return () => clearTimeout(timer);
   }, [isActive, onComplete]);

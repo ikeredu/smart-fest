@@ -25,6 +25,31 @@
       "effects": {
         "glowEffect": true
       }
+    },
+    {
+      "_type": "parentsBlock",
+      "headerLabel": "Nuestra Unión",
+      "brideParents": {
+        "label": "Padres de la Novia",
+        "father": "Roberto Rodríguez Silva",
+        "mother": "Sofía Silva Morales"
+      },
+      "groomParents": {
+        "label": "Padres del Novio",
+        "father": "William Thompson Miller",
+        "mother": "Elizabeth Wells Smith"
+      },
+      "brideFullName": {
+        "firstName": "Alejandra",
+        "lastName": "Guillén Sotelo"
+      },
+      "groomFullName": {
+        "firstName": "David Emmanuel",
+        "lastName": "Deloya Arteaga"
+      },
+      "invitationMessage": "Tienen el honor de invitarle a la celebración de su matrimonio, uniendo dos historias en un solo camino de amor.",
+      "yearText": "",
+      "backgroundImage": "/images/arbol.png"
     }
   ]
 }

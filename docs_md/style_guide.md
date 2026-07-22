@@ -37,11 +37,21 @@ Se establece una jerarquía tipográfica contrastada entre una fuente Serif de g
 
 ## ✨ Componentes y Capas Visuales
 
-### 1. Efecto Glassmorphism (`.glass-card`)
-Tarjetas translúcidas que permiten vislumbrar el fondo en movimiento sin sacrificar la legibilidad:
-*   **Fondo:** `rgba(255, 242, 230, 0.25)` (mezcla de *Mashed Potatoes* con transparencia).
-*   **Filtro:** `backdrop-blur(16px)`
-*   **Borde:** `1px solid rgba(255, 242, 230, 0.3)`
+### 1. Efecto Cristal Templado (`.glass-dark` y `.glass-crystalline`)
+Tarjetas translúcidas que permiten vislumbrar la imagen de fondo con acabado de vidrio pulido y bisel de luz:
+*   **`.glass-dark` (Cristal Oscuro Cabernet):**
+    *   Fondo: `rgba(61, 0, 0, 0.40)` (`bg-cabernet/40`)
+    *   Desenfoque: `backdrop-filter: blur(24px)` (`backdrop-blur-xl`)
+    *   Boleamiento / Bisel: `border: 1px solid rgba(255, 242, 230, 0.30)` (`border-potatoes/30`)
+*   **`.glass-crystalline` (Cristal Claro Cristalino - 30% Opacidad):**
+    *   Fondo: `rgba(255, 255, 255, 0.30)` (`bg-white/30` - sin densidad de porcelana)
+    *   Desenfoque: `backdrop-filter: blur(12px)` (`backdrop-blur-md`)
+    *   Bisel de Luz: `border: 1px solid rgba(255, 255, 255, 0.45)` con reflejo especular en los bordes.
+*   **`.glass-botanical-dark` (Cristal Verde Botánico Oscuro):**
+    *   Fondo: `rgba(29, 38, 28, 0.65)` (Verde Artichoke/Greenbean oscurecido)
+    *   Desenfoque: `backdrop-filter: blur(14px)` (`backdrop-blur-md`)
+    *   Bisel de Luz: `border: 1px solid rgba(255, 242, 230, 0.35)` con destello Mashed Potatoes.
+    *   Tipografía asociada: `text-potatoes` (`#FFF2E6`) radiante para 100% de contraste nítido.
 
 ### 2. Overlays de Fondo (`.hero-overlay`)
 Utilizado para oscurecer videos e imágenes cinematográficas en portadas, permitiendo que la tipografía de color *Mashed Potatoes* destaque:
