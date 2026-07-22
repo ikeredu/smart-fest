@@ -1,7 +1,7 @@
 {
   "id": "inv_001",
   "theme": {
-    "primaryColor": "#734141", 
+    "primaryColor": "#734141",
     "fontFamily": "sans-serif"
   },
   "music": {
@@ -11,8 +11,8 @@
   "blocks": [
     {
       "_type": "coverBlock",
-      "title": "Ethereal Union",
-      "subtitle": "SAVE THE DATE",
+      "title": "David & Alejandra",
+      "subtitle": "",
       "backgroundImage": "https://lh3.googleusercontent.com/aida/AP1WRLsomXEthfvsJTzQya42_12356PrRddcBvpZKCgCLmSYprq2QjAdoEqp7ivMY0v9d_GHidyONBxVtpzHMxQqrJIHxqDPHsm9YPuvtiiK2CcmoDhSr10z3nesSXLrrLshGVZPQwK0BMjdZV2LopYgoJLBthkACXLm9z4Z2-nzXv49GK4ejP0638Tz_bhtWte2pXoy9oQGSxXOLZX49-nVTo2oW7y-ReHmEJypS9E3iRS5zxnGv6GPMkZINBY",
       "scrollLabel": "Presione para abrir"
     },
