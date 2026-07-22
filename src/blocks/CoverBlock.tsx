@@ -25,11 +25,12 @@ export default function CoverBlock({
     }
 
     if (typeof window !== 'undefined') {
-      // 2. Desplazamiento cinematográfico suave con curva easeInOutCubic (1.2s)
-      const targetPosition = window.innerHeight;
+      // 2. Desplazamiento exacto hacia el inicio del siguiente bloque (offsetTop)
+      const nextElement = document.getElementById('block-1') || document.querySelector('section:nth-of-type(2)');
+      const targetPosition = nextElement ? (nextElement as HTMLElement).offsetTop : window.innerHeight;
       const startPosition = window.scrollY;
       const distance = targetPosition - startPosition;
-      const duration = 1200; // 1.2 segundos
+      const duration = 1000; // 1.0 segundo
       let startTimestamp: number | null = null;
 
       const easeInOutCubic = (t: number) => {
@@ -59,7 +60,8 @@ export default function CoverBlock({
 
   return (
     <section 
-      className="relative flex flex-col items-center justify-center w-full h-screen h-[100dvh] text-center overflow-hidden select-none bg-black transform translate-x-0"
+      id="block-0"
+      className="relative flex flex-col items-center justify-center w-full h-screen text-center overflow-hidden select-none bg-black transform translate-x-0"
     >
       {/* Widget de Música Embebido en la Portada (fijo en top-right de este bloque) */}
       {musicUrl && (
