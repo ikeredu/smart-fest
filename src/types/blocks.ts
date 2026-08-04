@@ -69,12 +69,27 @@ export const ParentsBlockSchema = z.object({
 
 export type ParentsBlockData = z.infer<typeof ParentsBlockSchema>;
 
+// 6. Definimos el esquema para el bloque de Confirmación (RSVP)
+export const RSVPBlockSchema = z.object({
+  _type: z.literal('rsvpBlock'),
+  title: z.string().default('Confirmar Asistencia'),
+  subtitle: z.string().optional().default('RSVP'),
+  backgroundImage: z.string().optional(),
+  maxGuests: z.number().default(2),
+  deadlineText: z.string().optional(),
+  submitButtonText: z.string().default('Confirmar'),
+  guestName: z.string().optional().default('Familia Invitada'),
+});
+
+export type RSVPBlockData = z.infer<typeof RSVPBlockSchema>;
+
 // Conforme agreguemos más bloques (Ubicación, Formulario), los uniremos aquí:
 export const AnyBlockSchema = z.discriminatedUnion('_type', [
   HeroBlockSchema,
   CoverBlockSchema,
   EventDetailsBlockSchema,
   ParentsBlockSchema,
+  RSVPBlockSchema,
 ]);
 
 export type AnyBlockData = z.infer<typeof AnyBlockSchema>;

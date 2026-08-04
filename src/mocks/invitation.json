@@ -51,6 +51,16 @@
       "invitationMessage": "Tienen el honor de invitarle a la celebración de su matrimonio, uniendo dos historias en un solo camino de amor.",
       "yearText": "",
       "backgroundImage": "/images/arbol.png"
+    },
+    {
+      "_type": "rsvpBlock",
+      "title": "Confirmación de Asistencia",
+      "subtitle": "RSVP",
+      "backgroundImage": "https://lh3.googleusercontent.com/aida/AP1WRLujgnAG_YMpxpAe5ta6gFr-FhthPetJ7i8eJuTNjZMyjB7IgxjHVU8mJbqHfBaQL6mAuiKWjKTZCEzSbrVg400gb7X_U8mW_SortI7P16Y1E4ncQv7OZxGsBF1cPbTEo8PixaURY7CMSXmQy9ETaFVYwJYAIo1K8ed49_FJ9kzLR9s2ZDymg1suCJGC7PtorZbisWqOVF9UWkHRvOYiWJ1ado3Dui4_XFAUIdriw4c1RsiZ9ZV8vDk_Mg",
+      "maxGuests": 4,
+      "deadlineText": "Favor de confirmar antes del 15 de Septiembre de 2026",
+      "submitButtonText": "Confirmar",
+      "guestName": "Familia Invitada"
     }
   ]
 }
