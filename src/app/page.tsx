@@ -38,6 +38,7 @@ export default function Home() {
                 {...block} 
                 musicUrl={musicConfig?.url} 
                 musicAutoplay={musicConfig?.autoplay} 
+                musicCoverImage={musicConfig?.coverImage}
                 onOpenCover={handleOpenInvitation}
               />
             );

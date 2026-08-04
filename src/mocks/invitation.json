@@ -5,7 +5,8 @@
     "fontFamily": "sans-serif"
   },
   "music": {
-    "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "url": "/music/music.m4a",
+    "coverImage": "/images/kenia.png",
     "autoplay": true
   },
   "blocks": [
