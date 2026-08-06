@@ -24,7 +24,7 @@ export default function HeroBlock({ title, subtitle, date, backgroundImage }: He
   return (
     <section
       id="block-1"
-      className="relative w-full h-screen flex flex-col justify-between items-center px-4 py-8 md:py-12 overflow-hidden select-none bg-black"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center px-4 py-8 md:py-12 overflow-hidden select-none bg-black"
     >
       {/* 1. Fondo de la Fotografía (brillo natural preservado) */}
       <div className="absolute inset-0 z-0">
@@ -35,17 +35,17 @@ export default function HeroBlock({ title, subtitle, date, backgroundImage }: He
           className="w-full h-full object-cover origin-center scale-100 transition-transform duration-10000 ease-out animate-slow-zoom"
         />
         {/* Degradado súper tenue en la parte superior únicamente para sutileza de lectura */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
       </div>
 
       {/* 2. HEADER SUPERIOR (Texto flotante sin contenedor/caja) */}
-      <header className="relative z-10 w-full max-w-md mx-auto pt-10 text-center animate-fade-in-up delay-100">
-        <p className="font-sans text-[11px] md:text-[13px] font-semibold text-potatoes tracking-[0.3em] uppercase mb-2 opacity-90 drop-shadow-sm">
+      <header className="relative z-10 w-full max-w-md mx-auto pt-6 md:pt-10 text-center animate-fade-in-up delay-100">
+        <p className="font-sans text-[10px] sm:text-[11px] md:text-[13px] font-semibold text-potatoes tracking-[0.3em] uppercase mb-2 opacity-90 drop-shadow-sm">
           {subtitle || 'THE WEDDING OF'}
         </p>
 
         {/* Título en color Artichoke verde orgánico (#586357) como en el mock */}
-        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-artichoke font-bold leading-tight drop-shadow-md mb-3">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-artichoke font-bold leading-tight drop-shadow-md mb-3">
           {title}
         </h1>
 

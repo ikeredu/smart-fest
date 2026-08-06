@@ -21,7 +21,7 @@ export default function ParentsBlock({
   return (
     <section
       id={id}
-      className="relative w-full h-screen flex flex-col justify-between items-center px-4 py-8 md:py-10 text-center overflow-hidden select-none bg-black text-potatoes"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes"
     >
       {/* 1. Fondo de Pantalla Completa: Fotografía del Árbol + Velo Completo de Cristal Verde Botánico Oscuro */}
       <div className="absolute inset-0 z-0">

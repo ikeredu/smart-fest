@@ -61,7 +61,7 @@ export default function CoverBlock({
   return (
     <section 
       id="block-0"
-      className="relative flex flex-col items-center justify-center w-full h-screen text-center overflow-hidden select-none bg-black transform translate-x-0"
+      className="relative flex flex-col justify-between items-center w-full min-h-[100dvh] py-8 md:py-12 text-center overflow-hidden select-none bg-black"
     >
       {/* Widget de Música Embebido en la Portada (fijo en top-right de este bloque) */}
       {musicUrl && (
@@ -84,26 +84,28 @@ export default function CoverBlock({
         </video>
 
         {/* Degradado súper sutil ("tantito") para garantizar la legibilidad ininterrumpida de los textos */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/10 via-black/20 to-black/40 pointer-events-none" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-black/30 to-black/50 pointer-events-none" />
       </div>
 
       {/* Marco Editorial Perimetral */}
       <div className="absolute inset-4 md:inset-8 z-10 border border-potatoes/20 rounded-2xl pointer-events-none opacity-0 animate-fade-in-up delay-100" />
 
-      {/* Contenido Principal Flotando Directamente sobre el Video */}
-      <main className="relative z-20 flex flex-col items-center justify-center h-full px-6">
-        <div className="text-center space-y-8">
-          {/* 1. Encabezado "SAVE THE DATE" */}
-          <div className="flex items-center justify-center gap-4 mb-4 opacity-0 animate-fade-in-up delay-300">
-            <div className="h-[1px] w-12 md:w-16 bg-potatoes/40" />
-            <span className="font-sans text-[11px] md:text-[13px] font-semibold text-potatoes tracking-[0.4em] uppercase">
-              {subtitle || ''}
-            </span>
-            <div className="h-[1px] w-12 md:w-16 bg-potatoes/40" />
-          </div>
+      {/* 1. Encabezado "SAVE THE DATE" (Flotando arriba con padding) */}
+      <header className="relative z-20 w-full pt-8 md:pt-12 px-6">
+        <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-in-up delay-300">
+          <div className="h-[1px] w-10 md:w-16 bg-potatoes/40" />
+          <span className="font-sans text-[10px] sm:text-[11px] md:text-[13px] font-semibold text-potatoes tracking-[0.35em] uppercase">
+            {subtitle || ''}
+          </span>
+          <div className="h-[1px] w-10 md:w-16 bg-potatoes/40" />
+        </div>
+      </header>
 
-          {/* 2. Título Principal */}
-          <h1 className="font-serif text-[48px] md:text-[68px] text-potatoes max-w-2xl leading-[1.1] drop-shadow-lg font-bold tracking-tight opacity-0 animate-fade-in-up delay-500">
+      {/* 2. Contenido Principal Flotando Directamente sobre el Video */}
+      <main className="relative z-20 flex flex-col items-center justify-center px-6 my-auto py-6">
+        <div className="text-center space-y-6 md:space-y-8">
+          {/* Título Principal */}
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-potatoes max-w-2xl leading-[1.15] drop-shadow-lg font-bold tracking-tight opacity-0 animate-fade-in-up delay-500">
             {words.length > 1 ? (
               <>
                 {firstPart} <br />
@@ -114,24 +116,26 @@ export default function CoverBlock({
             )}
           </h1>
 
-          {/* 3. Subtítulo con fecha */}
-          <div className="pt-6 opacity-0 animate-fade-in-up delay-700">
-            <p className="font-sans text-xs md:text-sm text-potatoes tracking-[0.3em] uppercase drop-shadow-sm font-semibold bg-white/10 px-6 py-2 rounded-full backdrop-blur-sm inline-block">
+          {/* Subtítulo con fecha */}
+          <div className="pt-2 md:pt-4 opacity-0 animate-fade-in-up delay-700">
+            <p className="font-sans text-[11px] sm:text-xs md:text-sm text-potatoes tracking-[0.25em] uppercase drop-shadow-sm font-semibold bg-white/10 px-5 py-1.5 md:px-6 md:py-2 rounded-full backdrop-blur-sm inline-block">
               Septiembre 2026
             </p>
           </div>
         </div>
+      </main>
 
-        {/* 4. Indicador inferior 'Presione para abrir' */}
+      {/* 3. Indicador inferior 'Presione para abrir' + Footer en flujo flex */}
+      <footer className="relative z-20 w-full flex flex-col items-center pb-4 md:pb-6 px-4 gap-4">
         <button
           onClick={handleScrollDown}
-          className="absolute bottom-16 left-0 right-0 flex flex-col items-center gap-4 cursor-pointer focus:outline-none group bg-transparent border-none w-full opacity-0 animate-fade-in-up delay-900"
+          className="flex flex-col items-center gap-3 cursor-pointer focus:outline-none group bg-transparent border-none w-full opacity-0 animate-fade-in-up delay-900"
         >
-          <span className="font-sans text-[11px] md:text-xs text-potatoes tracking-[0.3em] uppercase font-bold text-shadow-gold opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="font-sans text-[10px] sm:text-[11px] md:text-xs text-potatoes tracking-[0.25em] uppercase font-bold text-shadow-gold opacity-90 transition-opacity duration-300 group-hover:opacity-100">
             {scrollLabel || 'Presione para abrir'}
           </span>
 
-          <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 border-potatoes/30 backdrop-blur-md transition-all duration-500 hover:border-potatoes hover:bg-white/20 bg-white/10 shadow-2xl pulse-soft group-hover:scale-105 animate-gentle-float">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full border-2 border-potatoes/30 backdrop-blur-md transition-all duration-500 hover:border-potatoes hover:bg-white/20 bg-white/10 shadow-2xl pulse-soft group-hover:scale-105 animate-gentle-float">
             {/* Flecha doble hacia abajo en SVG fino */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -139,17 +143,14 @@ export default function CoverBlock({
               viewBox="0 0 24 24"
               strokeWidth={1}
               stroke="currentColor"
-              className="w-7 h-7 text-potatoes font-light"
+              className="w-6 h-6 sm:w-7 sm:h-7 text-potatoes font-light"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
             </svg>
           </div>
         </button>
-      </main>
 
-      {/* Footer Minimalista */}
-      <footer className="absolute bottom-4 left-0 w-full flex justify-center opacity-30 pointer-events-none z-20">
-        <span className="font-sans text-[8px] md:text-[10px] tracking-[0.5em] uppercase text-potatoes">
+        <span className="font-sans text-[8px] md:text-[10px] tracking-[0.4em] uppercase text-potatoes/40 pt-1">
           Con Cariño, Siempre
         </span>
       </footer>

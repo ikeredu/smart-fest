@@ -52,7 +52,7 @@ export default function EventDetailsBlock({ title, label, date, location, backgr
 
   return (
     <section 
-      className="relative w-full h-screen flex flex-col justify-between items-center p-6 md:p-12 overflow-hidden snap-start select-none bg-potatoes"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center p-6 md:p-12 overflow-hidden select-none bg-potatoes"
     >
       {/* Imagen de fondo del evento con Parallax */}
       {backgroundImage && (
@@ -74,8 +74,8 @@ export default function EventDetailsBlock({ title, label, date, location, backgr
       )}
 
       {/* 1. TÍTULO PRINCIPAL (Nombres de esposos / cumpleañero / evento) */}
-      <div className="relative z-10 w-full max-w-4xl text-center pt-12 md:pt-16 px-4">
-        <h1 className="font-serif text-[42px] md:text-[64px] text-potatoes leading-tight drop-shadow-md select-none font-normal">
+      <div className="relative z-10 w-full max-w-4xl text-center pt-8 md:pt-16 px-4">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl text-potatoes leading-tight drop-shadow-md select-none font-normal">
           {title}
         </h1>
       </div>

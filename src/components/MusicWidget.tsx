@@ -88,7 +88,7 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
   };
 
   return (
-    <div className="fixed top-6 right-6 z-50 select-none flex flex-col items-center">
+    <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 select-none flex flex-col items-center">
       {/* Elemento de audio nativo oculto */}
       <audio 
         ref={audioRef} 
@@ -100,7 +100,7 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
       />
 
       {/* Reproductor Ultra-Sutil y Translúcido */}
-      <div className="glass-card p-3 rounded-2xl flex flex-col gap-2.5 shadow-2xl bg-black/20 backdrop-blur-md border border-white/15 w-[190px] hover:bg-black/30 transition-all duration-500">
+      <div className="glass-card p-2.5 sm:p-3 rounded-2xl flex flex-col gap-2 sm:gap-2.5 shadow-2xl bg-black/20 backdrop-blur-md border border-white/15 w-[155px] sm:w-[190px] hover:bg-black/30 transition-all duration-500">
         
         {/* Fila Superior: Miniatura + Metadatos */}
         <div className="flex items-center gap-2.5">
