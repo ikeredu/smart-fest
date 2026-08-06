@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import HeroBlock from '@/blocks/HeroBlock';
 import CoverBlock from '@/blocks/CoverBlock';
 import ParentsBlock from '@/blocks/ParentsBlock';
+import RSVPBlock from '@/blocks/RSVPBlock';
 import PetalShower from '@/components/PetalShower';
 import invitationData from '@/mocks/invitation.json';
 import { AnyBlockData } from '@/types/blocks';
@@ -38,6 +39,7 @@ export default function Home() {
                 {...block} 
                 musicUrl={musicConfig?.url} 
                 musicAutoplay={musicConfig?.autoplay} 
+                musicCoverImage={musicConfig?.coverImage}
                 onOpenCover={handleOpenInvitation}
               />
             );
@@ -47,6 +49,9 @@ export default function Home() {
 
           case 'parentsBlock':
             return <ParentsBlock key={index} id={`block-${index}`} {...block} />;
+
+          case 'rsvpBlock':
+            return <RSVPBlock key={index} id={`block-${index}`} {...block} />;
           
           default:
             // Si viene un bloque desconocido, lo omitimos con gracia

@@ -46,74 +46,84 @@ export default function ParentsBlock({
       </header>
 
       {/* 3. CONTENIDO PRINCIPAL (Flotando directamente sobre el Cristal de Pantalla Completa) */}
-      <main className="relative z-10 w-full max-w-lg mx-auto flex flex-col items-center justify-center my-auto py-2">
-        {/* Sección de Padres */}
-        <div className="w-full flex flex-col items-center gap-4 mb-6 md:mb-8">
-          {/* Padres de la Novia */}
-          <div className="space-y-0.5">
-            <p className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes/70 font-semibold mb-1">
-              {brideParents.label}
-            </p>
-            <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
-              {brideParents.father}
-            </p>
-            <p className="font-sans text-xs md:text-sm font-normal text-potatoes/80 italic">
-              &
-            </p>
-            <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
-              {brideParents.mother}
-            </p>
-          </div>
+      <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-4 py-2">
+        {/* Contenedor Responsivo: Grid de 1 columna en móvil y 3 columnas en desktop */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-8 mb-6 md:mb-8">
 
-          {/* Ornamento Central */}
-          <div className="font-serif italic text-lg md:text-xl text-potatoes/60 my-0.5 select-none drop-shadow-sm">
-            ✧
-          </div>
+          {/* Bloque 1: La Novia y sus padres */}
+          <div className="flex flex-col items-center text-center space-y-3">
+            <div className="flex flex-col items-center">
+              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes/60 font-semibold mb-1">
+                La Novia
+              </span>
+              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-potatoes font-bold leading-snug drop-shadow-sm">
+                <span className="italic font-normal">{brideFullName.firstName}</span>
+                <br />
+                {brideFullName.lastName}
+              </h3>
+            </div>
 
-          {/* Padres del Novio */}
-          <div className="space-y-0.5">
-            <p className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes/70 font-semibold mb-1">
-              {groomParents.label}
-            </p>
-            <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
-              {groomParents.father}
-            </p>
-            <p className="font-sans text-xs md:text-sm font-normal text-potatoes/80 italic">
-              &
-            </p>
-            <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
-              {groomParents.mother}
-            </p>
-          </div>
-        </div>
-
-        {/* Nombres Completos de los Novios (Pieza Central Editorial Radiante) */}
-        <div className="w-full mb-6 md:mb-8">
-          <h2 className="flex flex-col items-center leading-tight">
-            <span className="font-serif italic text-2xl md:text-3xl lg:text-4xl text-potatoes font-medium drop-shadow-sm mb-0.5">
-              {brideFullName.firstName}
+            <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-potatoes/70 italic">
+              Con la bendición de
             </span>
-            <span className="font-serif text-xl md:text-2xl lg:text-3xl text-potatoes font-bold tracking-wide drop-shadow-sm">
-              {brideFullName.lastName}
-            </span>
-            
-            <span className="font-serif text-xl md:text-2xl text-potatoes font-bold my-2 opacity-90 drop-shadow-sm">
+
+            <div className="space-y-0.5">
+              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+                {brideParents.father}
+              </p>
+              <p className="font-sans text-xs text-potatoes/50 italic">&</p>
+              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+                {brideParents.mother}
+              </p>
+            </div>
+          </div>
+
+          {/* Divisor Central Responsivo */}
+          <div className="flex md:flex-col items-center justify-center py-2 md:py-0">
+            {/* Línea horizontal en móvil, vertical en desktop */}
+            <div className="h-[1px] w-12 md:w-[1px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-transparent to-potatoes/40" />
+
+            <span className="font-serif italic text-2xl md:text-3xl text-potatoes/60 mx-4 md:my-3 select-none">
               &
             </span>
 
-            <span className="font-serif italic text-2xl md:text-3xl lg:text-4xl text-potatoes font-medium drop-shadow-sm mb-0.5">
-              {groomFullName.firstName}
+            <div className="h-[1px] w-12 md:w-[1px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-potatoes/40 to-transparent" />
+          </div>
+
+          {/* Bloque 2: El Novio y sus padres */}
+          <div className="flex flex-col items-center text-center space-y-3">
+            <div className="flex flex-col items-center">
+              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes/60 font-semibold mb-1">
+                El Novio
+              </span>
+              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-potatoes font-bold leading-snug drop-shadow-sm">
+                <span className="italic font-normal">{groomFullName.firstName}</span>
+                <br />
+                {groomFullName.lastName}
+              </h3>
+            </div>
+
+            <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-potatoes/70 italic">
+              Con la bendición de
             </span>
-            <span className="font-serif text-xl md:text-2xl lg:text-3xl text-potatoes font-bold tracking-wide drop-shadow-sm">
-              {groomFullName.lastName}
-            </span>
-          </h2>
+
+            <div className="space-y-0.5">
+              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+                {groomParents.father}
+              </p>
+              <p className="font-sans text-xs text-potatoes/50 italic">&</p>
+              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+                {groomParents.mother}
+              </p>
+            </div>
+          </div>
+
         </div>
 
         {/* Mensaje de Invitación */}
-        <div className="w-full max-w-xs md:max-w-sm mx-auto">
-          <div className="w-[1px] h-8 mx-auto mb-4 bg-gradient-to-b from-transparent via-potatoes/30 to-transparent" />
-          <p className="font-sans text-xs md:text-sm italic text-potatoes/90 leading-relaxed font-normal drop-shadow-sm">
+        <div className="w-full max-w-xs md:max-w-md mx-auto">
+          <div className="w-[1px] h-8 mx-auto mb-4 bg-gradient-to-b from-transparent via-potatoes/35 to-transparent" />
+          <p className="font-sans text-xs md:text-sm italic text-potatoes/90 leading-relaxed font-normal">
             {invitationMessage}
           </p>
         </div>

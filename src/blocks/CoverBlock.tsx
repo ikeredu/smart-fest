@@ -7,6 +7,7 @@ import MusicWidget from '../components/MusicWidget';
 interface CoverBlockProps extends CoverBlockData {
   musicUrl?: string;
   musicAutoplay?: boolean;
+  musicCoverImage?: string;
   onOpenCover?: () => void;
 }
 
@@ -16,6 +17,7 @@ export default function CoverBlock({
   scrollLabel, 
   musicUrl, 
   musicAutoplay,
+  musicCoverImage,
   onOpenCover 
 }: CoverBlockProps) {
   const handleScrollDown = () => {
@@ -65,7 +67,7 @@ export default function CoverBlock({
     >
       {/* Widget de Música Embebido en la Portada (fijo en top-right de este bloque) */}
       {musicUrl && (
-        <MusicWidget url={musicUrl} autoplay={musicAutoplay} />
+        <MusicWidget url={musicUrl} autoplay={musicAutoplay} coverImage={musicCoverImage} />
       )}
       
       {/* Video de Fondo Directo */}

@@ -11,9 +11,10 @@ function cn(...inputs: ClassValue[]) {
 interface MusicWidgetProps {
   url: string;
   autoplay?: boolean;
+  coverImage?: string;
 }
 
-export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) {
+export default function MusicWidget({ url, autoplay = true, coverImage }: MusicWidgetProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -104,16 +105,25 @@ export default function MusicWidget({ url, autoplay = true }: MusicWidgetProps) 
         
         {/* Fila Superior: Miniatura + Metadatos */}
         <div className="flex items-center gap-2.5">
-          {/* Miniatura cuadrada con icono de nota musical */}
-          <div className="w-9 h-9 flex-shrink-0 rounded-lg bg-white/10 flex items-center justify-center border border-white/15 shadow-sm">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 24 24" 
-              fill="currentColor" 
-              className="w-4 h-4 text-potatoes"
-            >
-              <path d="M13.5 3.75a.75.75 0 0 0-1.5 0v11.25H6a3.75 3.75 0 1 0 0 7.5h6a3.75 3.75 0 0 0 3.75-3.75V3.75Z" />
-            </svg>
+          {/* Miniatura cuadrada con imagen o icono de nota musical */}
+          <div className="w-9 h-9 flex-shrink-0 rounded-lg overflow-hidden border border-white/15 shadow-sm bg-white/10 flex items-center justify-center">
+            {coverImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img 
+                src={coverImage} 
+                alt="Miniatura de música" 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="currentColor" 
+                className="w-4 h-4 text-potatoes"
+              >
+                <path d="M13.5 3.75a.75.75 0 0 0-1.5 0v11.25H6a3.75 3.75 0 1 0 0 7.5h6a3.75 3.75 0 0 0 3.75-3.75V3.75Z" />
+              </svg>
+            )}
           </div>
 
           {/* Información del tema y tiempo */}
