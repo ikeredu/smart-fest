@@ -16,23 +16,23 @@ export default function ParentsBlock({
   groomFullName,
   invitationMessage,
   yearText = 'Dos Mil Veintiséis',
-  backgroundImage = '/images/arbol_atardecer.jpg',
+  backgroundImage = '/images/arbol.png',
 }: ParentsBlockProps) {
   return (
     <section
       id={id}
-      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes"
+      className="relative w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes"
     >
-      {/* 1. Fondo de Pantalla Completa: Fotografía del Árbol + Velo Completo de Cristal Verde Botánico Oscuro */}
-      <div className="absolute inset-0 z-0">
+      {/* 1. Fondo de Pantalla Completa: Fotografía del Árbol + Velo Completo de Cristal Verde Botánico Oscuro (recortado a inset-0) */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={backgroundImage}
           alt="Árbol al Atardecer"
           className="w-full h-full object-cover origin-center scale-105"
         />
-        {/* Velo de Cristal Verde Botánico Oscuro sobre TODA la pantalla (#1D261C al 65% + backdrop-blur-md) */}
-        <div className="absolute inset-0 bg-[#1D261C]/65 backdrop-blur-[14px]" />
+        {/* Velo de Cristal Verde Botánico Oscuro acotado estrictamente a inset-0 */}
+        <div className="absolute inset-0 bg-[#1D261C]/70 backdrop-blur-[14px]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
       </div>
 

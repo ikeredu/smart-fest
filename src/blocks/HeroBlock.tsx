@@ -24,7 +24,7 @@ export default function HeroBlock({ title, subtitle, date, backgroundImage }: He
   return (
     <section
       id="block-1"
-      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center px-4 py-8 md:py-12 overflow-hidden select-none bg-black"
+      className="relative w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 md:py-12 overflow-hidden select-none bg-black"
     >
       {/* 1. Fondo de la Fotografía (brillo natural preservado) */}
       <div className="absolute inset-0 z-0">

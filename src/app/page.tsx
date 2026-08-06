@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen relative">
+    <main className="min-h-screen relative bg-black">
       {/* 1. Capa Flotante Global para la Lluvia Botánica de Pétalos */}
       <PetalShower 
         isActive={isPetalActive} 

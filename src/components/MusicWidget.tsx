@@ -89,7 +89,7 @@ export default function MusicWidget({ url, autoplay = true, coverImage }: MusicW
   };
 
   return (
-    <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 select-none flex flex-col items-center">
+    <div className="absolute top-3 right-3 sm:top-6 sm:right-6 z-30 select-none flex flex-col items-center">
       {/* Elemento de audio nativo oculto */}
       <audio 
         ref={audioRef} 

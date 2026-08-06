@@ -65,7 +65,7 @@ export default function RSVPBlock({
   return (
     <section
       id={id}
-      className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center overflow-hidden select-none bg-black text-on-surface transform translate-x-0"
+      className="relative w-full min-h-screen flex flex-col justify-between items-center overflow-hidden select-none bg-black text-on-surface transform translate-x-0"
     >
       {/* 1. Fondo de flores suaves con difuminado */}
       {backgroundImage && (
