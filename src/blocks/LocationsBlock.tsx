@@ -19,19 +19,19 @@ export default function LocationsBlock({
   const firstPart = titleWords.slice(0, -1).join(' ');
   const lastWord = titleWords[titleWords.length - 1];
 
-  // Helper para renderizar los iconos SVG según el tipo de locación
+  // Helper para renderizar los iconos SVG de trazo fino según el tipo de locación
   const renderLocationIcon = (type: LocationItemData['type']) => {
     switch (type) {
       case 'ceremony':
         return (
-          /* Icono de Iglesia / Templo */
+          /* Icono de Iglesia / Templo con trazo fino ultrafino */
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.2}
+            strokeWidth={1.0}
             stroke="currentColor"
-            className="w-7 h-7 text-potatoes/90"
+            className="w-6 h-6 text-potatoes/90"
           >
             <path
               strokeLinecap="round"
@@ -45,14 +45,14 @@ export default function LocationsBlock({
       case 'reception':
       case 'party':
         return (
-          /* Icono de Copas de Brindis / Celebración */
+          /* Icono de Copas de Brindis / Celebración con trazo fino */
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.2}
+            strokeWidth={1.0}
             stroke="currentColor"
-            className="w-7 h-7 text-potatoes/90"
+            className="w-6 h-6 text-potatoes/90"
           >
             <path
               strokeLinecap="round"
@@ -69,9 +69,9 @@ export default function LocationsBlock({
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.2}
+            strokeWidth={1.0}
             stroke="currentColor"
-            className="w-7 h-7 text-potatoes/90"
+            className="w-6 h-6 text-potatoes/90"
           >
             <path
               strokeLinecap="round"
@@ -91,9 +91,9 @@ export default function LocationsBlock({
   return (
     <section
       id={id}
-      className="relative w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes"
+      className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-black text-potatoes overflow-hidden transform translate-x-0"
     >
-      {/* 1. Fondo de Pantalla Completa con Velo Verde Botánico Oscuro */}
+      {/* 1. Fondo de Pantalla Completa con Velo Botánico Oscuro Oficial */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -101,14 +101,14 @@ export default function LocationsBlock({
           alt="Fondo de Ubicaciones"
           className="w-full h-full object-cover origin-center scale-105"
         />
-        {/* Velo translúcido con desenfoque de cristal botánico */}
-        <div className="absolute inset-0 bg-[#1D261C]/75 backdrop-blur-[14px]" />
+        {/* Velo translúcido con desenfoque de cristal botánico estandarizado */}
+        <div className="absolute inset-0 glass-botanical-dark" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
       </div>
 
       {/* 2. ENCABEZADO SUPERIOR */}
       <header className="relative z-10 w-full flex flex-col items-center pt-4 md:pt-6 animate-fade-in-up">
-        <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.25em] font-semibold text-potatoes/70 mb-2 drop-shadow-sm">
+        <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-semibold text-potatoes/70 mb-2 drop-shadow-sm">
           {subtitle}
         </span>
 
@@ -127,85 +127,81 @@ export default function LocationsBlock({
         <div className="w-[1px] h-6 bg-gradient-to-b from-transparent via-potatoes/40 to-transparent mt-3" />
       </header>
 
-      {/* 3. CONTENIDO PRINCIPAL: Grid de Tarjetas de Ubicación */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-2 py-4 animate-fade-in-up">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
-          {locations.map((loc) => (
-            <div
-              key={loc.id}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col justify-between items-center text-center space-y-4 hover:border-potatoes/40 transition-all duration-300 group"
-            >
-              {/* Encabezado de la Tarjeta con Icono y Tipo */}
-              <div className="flex flex-col items-center space-y-2">
-                <div className="w-12 h-12 rounded-full bg-potatoes/10 border border-potatoes/20 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-300">
-                  {renderLocationIcon(loc.type)}
-                </div>
+      {/* 3. CONTENIDO PRINCIPAL: Grid de Tarjetas Slim Glass Editorial */}
+      <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-2 py-2 animate-fade-in-up">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-stretch">
+          {locations.map((loc) => {
+            const navUrl =
+              loc.mapsUrl ||
+              loc.googleMapsUrl ||
+              `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${loc.venueName}, ${loc.address}`)}`;
 
-                <span className="font-sans text-[10px] uppercase tracking-[0.2em] font-semibold text-potatoes/60">
-                  {loc.title}
-                </span>
+            return (
+              <div
+                key={loc.id}
+                className="bg-white/[0.04] backdrop-blur-md border border-potatoes/20 rounded-2xl p-5 md:p-6 flex flex-col justify-between items-center text-center space-y-4 hover:border-potatoes/40 hover:bg-white/[0.07] transition-all duration-500 shadow-xl group"
+              >
+                {/* Header: Icono flotante minimalista de línea fina + Tipo + Nombre del lugar */}
+                <div className="flex flex-col items-center space-y-1.5">
+                  <div className="text-potatoes/80 mb-0.5 group-hover:scale-110 transition-transform duration-500">
+                    {renderLocationIcon(loc.type)}
+                  </div>
 
-                <h3 className="font-serif text-xl md:text-2xl font-bold text-potatoes drop-shadow-sm leading-snug">
-                  {loc.venueName}
-                </h3>
-              </div>
-
-              {/* Hora y Dirección */}
-              <div className="space-y-2 w-full">
-                <div className="inline-block bg-white/10 backdrop-blur-sm border border-potatoes/20 px-3 py-1 rounded-full">
-                  <span className="font-sans text-xs md:text-sm font-semibold tracking-widest text-potatoes uppercase">
-                    {loc.time}
+                  <span className="font-sans text-[9.5px] uppercase tracking-[0.35em] font-semibold text-potatoes/60">
+                    {loc.title}
                   </span>
+
+                  <h3 className="font-serif text-lg md:text-xl font-normal text-potatoes drop-shadow-sm leading-snug">
+                    {loc.venueName}
+                  </h3>
                 </div>
 
-                <p className="font-sans text-xs md:text-sm italic text-potatoes/85 leading-relaxed max-w-xs mx-auto">
-                  {loc.address}
-                </p>
-              </div>
+                {/* Divisor Fino en Degradado */}
+                <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-potatoes/35 to-transparent" />
 
-              {/* Botones de Acción (Navegación GPS) */}
-              <div className="w-full pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a
-                  href={loc.googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto flex-1 bg-potatoes/20 hover:bg-potatoes text-potatoes hover:text-black font-sans text-xs font-bold py-2.5 px-4 rounded-full border border-potatoes/40 transition-all duration-300 flex items-center justify-center gap-2 tracking-wider uppercase cursor-pointer shadow-md active:scale-95"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                    />
-                  </svg>
-                  <span>Cómo llegar</span>
-                </a>
+                {/* Detalle de Hora y Dirección en composición tipográfica sobria (Sin cápsulas gruesas) */}
+                <div className="space-y-1 w-full">
+                  <p className="font-sans text-xs tracking-[0.25em] font-semibold text-potatoes/90 uppercase">
+                    {loc.time}
+                  </p>
+                  <p className="font-serif italic text-xs text-potatoes/75 leading-relaxed max-w-xs mx-auto">
+                    {loc.address}
+                  </p>
+                </div>
 
-                {loc.wazeUrl && (
+                {/* Botón Ghost Etéreo (Sútil, con hover fluido) */}
+                <div className="w-full pt-1">
                   <a
-                    href={loc.wazeUrl}
+                    href={navUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-potatoes font-sans text-xs font-semibold py-2.5 px-4 rounded-full border border-white/20 transition-all duration-300 flex items-center justify-center gap-1.5 tracking-wider uppercase cursor-pointer active:scale-95"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-potatoes/[0.08] hover:bg-potatoes hover:text-black text-potatoes font-sans text-[10px] md:text-[11px] font-bold py-2.5 px-4 rounded-full border border-potatoes/30 transition-all duration-500 tracking-[0.25em] uppercase cursor-pointer group/btn shadow-sm"
                   >
-                    <span>Waze</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-3.5 h-3.5 text-potatoes group-hover/btn:text-black transition-colors"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                      />
+                    </svg>
+                    <span>Cómo llegar</span>
                   </a>
-                )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </main>
 

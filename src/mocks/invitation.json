@@ -56,7 +56,7 @@
       "_type": "locationsBlock",
       "title": "Ubicaciones",
       "subtitle": "Dónde & Cuándo",
-      "backgroundImage": "/images/foto_novios.avif",
+      "backgroundImage": "/images/igles.jpg",
       "locations": [
         {
           "id": "loc_ceremony",
@@ -65,8 +65,7 @@
           "venueName": "Parroquia de San Miguel Arcángel",
           "time": "17:00 HRS",
           "address": "Av. Universidad #120, Col. Centro, Querétaro, Qro.",
-          "googleMapsUrl": "https://maps.google.com/?q=Parroquia+de+San+Miguel+Arcangel",
-          "wazeUrl": "https://waze.com/ul?q=Parroquia+de+San+Miguel+Arcangel"
+          "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=Parroquia+de+San+Miguel+Arcangel+Queretaro"
         },
         {
           "id": "loc_reception",
@@ -75,8 +74,7 @@
           "venueName": "Hacienda Las Campanas",
           "time": "19:30 HRS",
           "address": "Carretera a Celaya Km 8.5, Querétaro, Qro.",
-          "googleMapsUrl": "https://maps.google.com/?q=Hacienda+Las+Campanas+Queretaro",
-          "wazeUrl": "https://waze.com/ul?q=Hacienda+Las+Campanas+Queretaro"
+          "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=Hacienda+Las+Campanas+Queretaro"
         }
       ]
     },

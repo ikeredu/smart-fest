@@ -91,8 +91,9 @@ export const LocationItemSchema = z.object({
   venueName: z.string(), // Ej: "Parroquia de San Miguel Arcángel"
   time: z.string(), // Ej: "17:00 HRS"
   address: z.string(), // Ej: "Av. Universidad 120, Col. Centro, Querétaro"
-  googleMapsUrl: z.string().url(),
-  wazeUrl: z.string().url().optional(),
+  mapsUrl: z.string().url().optional(), // URL universal de navegación (Google Maps / Apple Maps / Universal)
+  googleMapsUrl: z.string().url().optional(), // Fallback legacy
+  wazeUrl: z.string().url().optional(), // Fallback legacy opcional
 });
 
 export type LocationItemData = z.infer<typeof LocationItemSchema>;
