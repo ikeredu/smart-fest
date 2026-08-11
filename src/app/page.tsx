@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import HeroBlock from '@/blocks/HeroBlock';
 import CoverBlock from '@/blocks/CoverBlock';
 import ParentsBlock from '@/blocks/ParentsBlock';
+import LocationsBlock from '@/blocks/LocationsBlock';
 import RSVPBlock from '@/blocks/RSVPBlock';
 import PetalShower from '@/components/PetalShower';
 import invitationData from '@/mocks/invitation.json';
@@ -49,6 +50,9 @@ export default function Home() {
 
           case 'parentsBlock':
             return <ParentsBlock key={index} id={`block-${index}`} {...block} />;
+
+          case 'locationsBlock':
+            return <LocationsBlock key={index} id={`block-${index}`} {...block} />;
 
           case 'rsvpBlock':
             return <RSVPBlock key={index} id={`block-${index}`} {...block} />;

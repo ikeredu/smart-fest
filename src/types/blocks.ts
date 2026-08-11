@@ -83,6 +83,31 @@ export const RSVPBlockSchema = z.object({
 
 export type RSVPBlockData = z.infer<typeof RSVPBlockSchema>;
 
+// 7. Definimos el esquema para los ítems individuales de ubicación (Ceremonia, Recepción, etc.)
+export const LocationItemSchema = z.object({
+  id: z.string(),
+  type: z.enum(['ceremony', 'reception', 'party', 'other']).default('ceremony'),
+  title: z.string(), // Ej: "Ceremonia Religiosa"
+  venueName: z.string(), // Ej: "Parroquia de San Miguel Arcángel"
+  time: z.string(), // Ej: "17:00 HRS"
+  address: z.string(), // Ej: "Av. Universidad 120, Col. Centro, Querétaro"
+  googleMapsUrl: z.string().url(),
+  wazeUrl: z.string().url().optional(),
+});
+
+export type LocationItemData = z.infer<typeof LocationItemSchema>;
+
+// 8. Definimos el esquema para el bloque de Ubicaciones (Locations)
+export const LocationsBlockSchema = z.object({
+  _type: z.literal('locationsBlock'),
+  title: z.string().default('Ubicaciones'),
+  subtitle: z.string().optional().default('Dónde & Cuándo'),
+  backgroundImage: z.string().optional(),
+  locations: z.array(LocationItemSchema),
+});
+
+export type LocationsBlockData = z.infer<typeof LocationsBlockSchema>;
+
 // Conforme agreguemos más bloques (Ubicación, Formulario), los uniremos aquí:
 export const AnyBlockSchema = z.discriminatedUnion('_type', [
   HeroBlockSchema,
@@ -90,7 +115,9 @@ export const AnyBlockSchema = z.discriminatedUnion('_type', [
   EventDetailsBlockSchema,
   ParentsBlockSchema,
   RSVPBlockSchema,
+  LocationsBlockSchema,
 ]);
 
 export type AnyBlockData = z.infer<typeof AnyBlockSchema>;
+
 

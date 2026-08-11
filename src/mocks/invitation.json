@@ -32,13 +32,13 @@
       "headerLabel": "Nuestra Unión",
       "brideParents": {
         "label": "Padres de la Novia",
-        "father": "Roberto Rodríguez Silva",
-        "mother": "Sofía Silva Morales"
+        "father": "Alejandro Guillén Hernández",
+        "mother": "Araceli Sotelo García"
       },
       "groomParents": {
         "label": "Padres del Novio",
-        "father": "William Thompson Miller",
-        "mother": "Elizabeth Wells Smith"
+        "father": "Alfredo Deloya Martínez",
+        "mother": "Guadalupe Arteaga Meza"
       },
       "brideFullName": {
         "firstName": "Alejandra",
@@ -51,6 +51,34 @@
       "invitationMessage": "Tienen el honor de invitarle a la celebración de su matrimonio, uniendo dos historias en un solo camino de amor.",
       "yearText": "",
       "backgroundImage": "/images/arbol.png"
+    },
+    {
+      "_type": "locationsBlock",
+      "title": "Ubicaciones",
+      "subtitle": "Dónde & Cuándo",
+      "backgroundImage": "/images/foto_novios.avif",
+      "locations": [
+        {
+          "id": "loc_ceremony",
+          "type": "ceremony",
+          "title": "Ceremonia Religiosa",
+          "venueName": "Parroquia de San Miguel Arcángel",
+          "time": "17:00 HRS",
+          "address": "Av. Universidad #120, Col. Centro, Querétaro, Qro.",
+          "googleMapsUrl": "https://maps.google.com/?q=Parroquia+de+San+Miguel+Arcangel",
+          "wazeUrl": "https://waze.com/ul?q=Parroquia+de+San+Miguel+Arcangel"
+        },
+        {
+          "id": "loc_reception",
+          "type": "reception",
+          "title": "Recepción & Fiesta",
+          "venueName": "Hacienda Las Campanas",
+          "time": "19:30 HRS",
+          "address": "Carretera a Celaya Km 8.5, Querétaro, Qro.",
+          "googleMapsUrl": "https://maps.google.com/?q=Hacienda+Las+Campanas+Queretaro",
+          "wazeUrl": "https://waze.com/ul?q=Hacienda+Las+Campanas+Queretaro"
+        }
+      ]
     },
     {
       "_type": "rsvpBlock",
