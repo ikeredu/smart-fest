@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
 export async function loginAction(formData: FormData) {
   const email = formData.get('email') as string;
@@ -54,12 +55,65 @@ export async function signupAction(formData: FormData) {
     return { error: error.message };
   }
 
-  // If email confirmation is required, inform the user or redirect
   if (data.session) {
     redirect('/dashboard');
   }
 
   return { success: 'Cuenta creada con éxito. Por favor inicia sesión o revisa tu correo.' };
+}
+
+export async function loginWithGoogleAction() {
+  const supabase = await createClient();
+  const headerList = await headers();
+  const host = headerList.get('host') || 'localhost:3000';
+  const protocol = host.includes('localhost') ? 'http' : 'https';
+  const redirectTo = `${protocol}://${host}/auth/callback`;
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo,
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent',
+      },
+    },
+  });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  if (data.url) {
+    redirect(data.url);
+  }
+}
+
+export async function sendMagicLinkAction(formData: FormData) {
+  const email = formData.get('email') as string;
+
+  if (!email) {
+    return { error: 'Ingresa un correo electrónico válido.' };
+  }
+
+  const supabase = await createClient();
+  const headerList = await headers();
+  const host = headerList.get('host') || 'localhost:3000';
+  const protocol = host.includes('localhost') ? 'http' : 'https';
+  const emailRedirectTo = `${protocol}://${host}/auth/callback`;
+
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo,
+    },
+  });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { success: '¡Enlace mágico enviado! Revisa tu correo electrónico para ingresar.' };
 }
 
 export async function logoutAction() {

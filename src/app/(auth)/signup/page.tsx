@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from 'react';
 import Link from 'next/link';
-import { signupAction } from '../actions';
+import { signupAction, loginWithGoogleAction } from '../actions';
 
 export default function SignupPage() {
   const [error, setError] = useState<string | null>(null);
@@ -25,8 +25,19 @@ export default function SignupPage() {
     });
   };
 
+  const handleGoogleSignup = () => {
+    setError(null);
+    setSuccess(null);
+    startTransition(async () => {
+      const res = await loginWithGoogleAction();
+      if (res?.error) {
+        setError(res.error);
+      }
+    });
+  };
+
   return (
-    <section className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-8 text-center select-none bg-black text-potatoes overflow-hidden transform translate-x-0">
+    <section className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 text-center select-none bg-black text-potatoes overflow-hidden transform translate-x-0">
       {/* Fondo y Velo Botánico Oscuro */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 glass-botanical-dark" />
@@ -34,7 +45,7 @@ export default function SignupPage() {
       </div>
 
       {/* Header Superior */}
-      <header className="relative z-10 w-full max-w-md pt-4">
+      <header className="relative z-10 w-full max-w-md pt-2">
         <span className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-semibold text-potatoes/70 block">
           Smart-Fest Platform
         </span>
@@ -43,14 +54,43 @@ export default function SignupPage() {
         </h1>
       </header>
 
-      {/* Tarjeta Cristalina de Registro (Slim Glass Design) */}
+      {/* Tarjeta Cristalina de Registro */}
       <main className="relative z-10 my-auto w-full max-w-sm glass-crystalline rounded-2xl p-6 md:p-8 text-left border border-potatoes/20 shadow-2xl backdrop-blur-xl">
-        <h2 className="text-lg font-serif text-potatoes mb-1 text-center">
-          Registro de <span className="italic font-normal">Anfitrión</span>
-        </h2>
-        <p className="text-xs text-potatoes/70 text-center mb-6">
-          Comienza a gestionar tus invitaciones y listas de invitados
-        </p>
+        {/* Botón de Registro con Google */}
+        <button
+          type="button"
+          onClick={handleGoogleSignup}
+          disabled={isPending}
+          className="w-full flex items-center justify-center space-x-3 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-potatoes text-xs tracking-wider font-semibold transition-all duration-300 disabled:opacity-50"
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24">
+            <path
+              fill="#EA4335"
+              d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.2 9 5 12 5z"
+            />
+            <path
+              fill="#4285F4"
+              d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M5.6 14.8c-.3-.8-.4-1.7-.4-2.8s.1-2 .4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"
+            />
+            <path
+              fill="#34A853"
+              d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.2-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"
+            />
+          </svg>
+          <span>Registrarse con Google</span>
+        </button>
+
+        {/* Divisor Estético */}
+        <div className="relative my-4 flex items-center justify-center">
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-potatoes/30 to-transparent" />
+          <span className="absolute px-3 bg-black/60 text-[9px] uppercase tracking-[0.25em] text-potatoes/60 rounded-full">
+            o completa el formulario
+          </span>
+        </div>
 
         {error && (
           <div className="mb-4 p-3 rounded-xl bg-cranberry/40 border border-cranberry/60 text-potatoes text-xs text-center">
@@ -59,12 +99,12 @@ export default function SignupPage() {
         )}
 
         {success && (
-          <div className="mb-4 p-3 rounded-xl bg-greenbean/60 border border-potatoes/40 text-potatoes text-xs text-center">
+          <div className="mb-4 p-3 rounded-xl bg-greenbean/70 border border-potatoes/40 text-potatoes text-xs text-center">
             {success}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
             <label className="block text-[10px] uppercase tracking-[0.2em] font-semibold text-potatoes/80 mb-1">
               Nombre Completo o Novios
@@ -74,7 +114,7 @@ export default function SignupPage() {
               name="fullName"
               required
               placeholder="Ej. Sofía & Diego"
-              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
             />
           </div>
 
@@ -87,7 +127,7 @@ export default function SignupPage() {
               name="email"
               required
               placeholder="tu@email.com"
-              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
             />
           </div>
 
@@ -100,7 +140,7 @@ export default function SignupPage() {
               name="password"
               required
               placeholder="Mínimo 6 caracteres"
-              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
             />
           </div>
 
@@ -113,7 +153,7 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <div className="mt-6 text-center text-xs text-potatoes/60">
+        <div className="mt-5 text-center text-xs text-potatoes/60">
           ¿Ya tienes cuenta?{' '}
           <Link href="/login" className="text-potatoes font-semibold underline underline-offset-4 hover:text-potatoes/80">
             Inicia sesión aquí
