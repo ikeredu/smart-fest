@@ -3,6 +3,7 @@
 import React, { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { signupAction, loginWithGoogleAction } from '../actions';
+import ThemeToggle from '@/components/dashboard/ThemeToggle';
 
 export default function SignupPage() {
   const [error, setError] = useState<string | null>(null);
@@ -37,31 +38,30 @@ export default function SignupPage() {
   };
 
   return (
-    <section className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 text-center select-none bg-black text-potatoes overflow-hidden transform translate-x-0">
-      {/* Fondo y Velo Botánico Oscuro */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 glass-botanical-dark" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
-      </div>
+    <section className="min-h-screen w-full flex flex-col justify-between items-center px-4 py-6 text-center select-none bg-slate-100 dark:bg-[#0b132b] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      {/* Header Superior con Selector de Tema */}
+      <header className="w-full max-w-md pt-2 flex items-center justify-between">
+        <div className="text-left">
+          <span className="text-[11px] uppercase tracking-wider font-semibold text-emerald-600 dark:text-emerald-400 block">
+            Smart-Fest Platform
+          </span>
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+            Crea tu Cuenta
+          </h1>
+        </div>
 
-      {/* Header Superior */}
-      <header className="relative z-10 w-full max-w-md pt-2">
-        <span className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-semibold text-potatoes/70 block">
-          Smart-Fest Platform
-        </span>
-        <h1 className="font-serif text-2xl md:text-3xl text-potatoes mt-1">
-          Crea tu <span className="italic font-normal">Cuenta</span>
-        </h1>
+        {/* Switch de Tema */}
+        <ThemeToggle />
       </header>
 
-      {/* Tarjeta Cristalina de Registro */}
-      <main className="relative z-10 my-auto w-full max-w-sm glass-crystalline rounded-2xl p-6 md:p-8 text-left border border-potatoes/20 shadow-2xl backdrop-blur-xl">
+      {/* Tarjeta SaaS de Registro */}
+      <main className="my-auto w-full max-w-sm bg-white dark:bg-[#1c2541] rounded-2xl p-6 md:p-8 text-left border border-slate-200 dark:border-slate-800 shadow-xl transition-colors duration-300">
         {/* Botón de Registro con Google */}
         <button
           type="button"
           onClick={handleGoogleSignup}
           disabled={isPending}
-          className="w-full flex items-center justify-center space-x-3 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-potatoes text-xs tracking-wider font-semibold transition-all duration-300 disabled:opacity-50"
+          className="w-full flex items-center justify-center space-x-3 py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-900/80 dark:hover:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-xs font-semibold transition-all duration-200 disabled:opacity-50 cursor-pointer shadow-sm"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path
@@ -86,40 +86,40 @@ export default function SignupPage() {
 
         {/* Divisor Estético */}
         <div className="relative my-4 flex items-center justify-center">
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-potatoes/30 to-transparent" />
-          <span className="absolute px-3 bg-black/60 text-[9px] uppercase tracking-[0.25em] text-potatoes/60 rounded-full">
+          <div className="w-full h-[1px] bg-slate-200 dark:bg-slate-800" />
+          <span className="absolute px-3 bg-white dark:bg-[#1c2541] text-[10px] uppercase tracking-wider text-slate-400 font-medium">
             o completa el formulario
           </span>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-cranberry/40 border border-cranberry/60 text-potatoes text-xs text-center">
+          <div className="mb-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-300 text-xs text-center">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-4 p-3 rounded-xl bg-greenbean/70 border border-potatoes/40 text-potatoes text-xs text-center">
+          <div className="mb-4 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs text-center">
             {success}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
-            <label className="block text-[10px] uppercase tracking-[0.2em] font-semibold text-potatoes/80 mb-1">
-              Nombre Completo o Novios
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              Nombre Completo u Anfitrión
             </label>
             <input
               type="text"
               name="fullName"
               required
-              placeholder="Ej. Sofía & Diego"
-              className="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
+              placeholder="Ej. Sofía & Diego / Carlos Gómez"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-xs placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase tracking-[0.2em] font-semibold text-potatoes/80 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Correo Electrónico
             </label>
             <input
@@ -127,12 +127,12 @@ export default function SignupPage() {
               name="email"
               required
               placeholder="tu@email.com"
-              className="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-xs placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase tracking-[0.2em] font-semibold text-potatoes/80 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Contraseña
             </label>
             <input
@@ -140,30 +140,30 @@ export default function SignupPage() {
               name="password"
               required
               placeholder="Mínimo 6 caracteres"
-              className="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-potatoes/20 text-potatoes text-xs placeholder:text-potatoes/30 focus:outline-none focus:border-potatoes/60 transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-xs placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 transition-colors"
             />
           </div>
 
           <button
             type="submit"
             disabled={isPending}
-            className="w-full mt-2 py-3 px-6 rounded-xl bg-potatoes/[0.1] hover:bg-potatoes hover:text-black border border-potatoes/40 text-potatoes text-xs uppercase tracking-[0.25em] font-semibold transition-all duration-300 disabled:opacity-50"
+            className="w-full mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
           >
             {isPending ? 'Registrando...' : 'Crear mi Cuenta'}
           </button>
         </form>
 
-        <div className="mt-5 text-center text-xs text-potatoes/60">
+        <div className="mt-5 text-center text-xs text-slate-500 dark:text-slate-400">
           ¿Ya tienes cuenta?{' '}
-          <Link href="/login" className="text-potatoes font-semibold underline underline-offset-4 hover:text-potatoes/80">
+          <Link href="/login" className="text-emerald-600 dark:text-emerald-400 font-semibold underline underline-offset-4 hover:opacity-80">
             Inicia sesión aquí
           </Link>
         </div>
       </main>
 
       {/* Footer Inferior */}
-      <footer className="relative z-10 w-full max-w-md pb-2 text-[10px] uppercase tracking-[0.2em] text-potatoes/40">
-        Smart-Fest &copy; {new Date().getFullYear()} — Event Management
+      <footer className="w-full max-w-md pb-2 text-[11px] text-slate-400 dark:text-slate-500">
+        Smart-Fest &copy; {new Date().getFullYear()} — Event Management Platform
       </footer>
     </section>
   );

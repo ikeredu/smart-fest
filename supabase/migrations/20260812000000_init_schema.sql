@@ -21,9 +21,10 @@ BEGIN
   INSERT INTO public.profiles (id, full_name, email)
   VALUES (
     new.id,
-    COALESCE(new.raw_user_meta_data->>'full_name', new.email),
+    COALESCE(new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'name', new.email),
     new.email
-  );
+  )
+  ON CONFLICT (id) DO NOTHING;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -84,6 +85,9 @@ ALTER TABLE public.guests ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
 CREATE POLICY "Users can view own profile" ON public.profiles FOR SELECT USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
+CREATE POLICY "Users can insert own profile" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
+
 DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
 CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
 
@@ -100,3 +104,19 @@ CREATE POLICY "Event owners have full access to guests" ON public.guests FOR ALL
 
 DROP POLICY IF EXISTS "Public can update RSVP status" ON public.guests;
 CREATE POLICY "Public can update RSVP status" ON public.guests FOR UPDATE USING (true) WITH CHECK (true);
+
+-- 6. BACKFILL EXISTING USERS INTO PROFILES TABLE
+INSERT INTO public.profiles (id, full_name, email)
+SELECT 
+  id, 
+  COALESCE(raw_user_meta_data->>'full_name', raw_user_meta_data->>'name', email) as full_name, 
+  email 
+FROM auth.users
+ON CONFLICT (id) DO NOTHING;
+
+-- 7. PERMISSIONS & SCHEMA CACHE RELOAD
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO authenticated;
+GRANT SELECT ON public.events TO anon;
+
+NOTIFY pgrst, 'reload schema';
