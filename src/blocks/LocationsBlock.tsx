@@ -91,9 +91,9 @@ export default function LocationsBlock({
   return (
     <section
       id={id}
-      className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-black text-potatoes overflow-hidden transform translate-x-0"
+      className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-potatoes text-mulledwine overflow-hidden transform translate-x-0"
     >
-      {/* 1. Fondo de Pantalla Completa con Velo Botánico Oscuro Oficial */}
+      {/* 1. Fondo de Pantalla Completa con Velo Luminoso */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -101,22 +101,21 @@ export default function LocationsBlock({
           alt="Fondo de Ubicaciones"
           className="w-full h-full object-cover origin-center scale-105"
         />
-        {/* Velo translúcido con desenfoque de cristal botánico estandarizado */}
-        <div className="absolute inset-0 glass-botanical-dark" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
+        {/* Sin velo opaco, dejamos la imagen por sí sola. Solo un gradiente blanco ultra-sutil arriba y abajo para asegurar que el texto oscuro se lea bien */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/40 pointer-events-none" />
       </div>
 
       {/* 2. ENCABEZADO SUPERIOR */}
       <header className="relative z-10 w-full flex flex-col items-center pt-4 md:pt-6 animate-fade-in-up">
-        <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-semibold text-potatoes/70 mb-2 drop-shadow-sm">
+        <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-semibold text-mulledwine/70 mb-2 drop-shadow-sm">
           {subtitle}
         </span>
 
-        <h2 className="font-serif text-3xl md:text-5xl text-potatoes font-bold tracking-tight leading-tight">
+        <h2 className="font-serif text-3xl md:text-5xl text-mulledwine font-bold tracking-tight leading-tight">
           {titleWords.length > 1 ? (
             <>
               {firstPart}{' '}
-              <span className="italic font-normal font-serif text-potatoes">{lastWord}</span>
+              <span className="italic font-normal font-serif text-mulledwine">{lastWord}</span>
             </>
           ) : (
             title
@@ -124,10 +123,10 @@ export default function LocationsBlock({
         </h2>
 
         {/* Divisor fino */}
-        <div className="w-[1px] h-6 bg-gradient-to-b from-transparent via-potatoes/40 to-transparent mt-3" />
+        <div className="w-[1px] h-6 bg-gradient-to-b from-transparent via-mulledwine/40 to-transparent mt-3" />
       </header>
 
-      {/* 3. CONTENIDO PRINCIPAL: Grid de Tarjetas Slim Glass Editorial */}
+      {/* 3. CONTENIDO PRINCIPAL: Grid de Tarjetas Verdes Oscuras */}
       <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-2 py-2 animate-fade-in-up">
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-stretch">
           {locations.map((loc) => {
@@ -139,7 +138,8 @@ export default function LocationsBlock({
             return (
               <div
                 key={loc.id}
-                className="bg-white/[0.04] backdrop-blur-md border border-potatoes/20 rounded-2xl p-5 md:p-6 flex flex-col justify-between items-center text-center space-y-4 hover:border-potatoes/40 hover:bg-white/[0.07] transition-all duration-500 shadow-xl group"
+                className="glass-botanical-dark rounded-2xl p-5 md:p-6 flex flex-col justify-between items-center text-center space-y-4 hover:border-potatoes/40 transition-all duration-500 shadow-2xl shadow-black/20 group"
+                style={{ backgroundColor: 'rgba(29, 38, 28, 0.85)' }}
               >
                 {/* Header: Icono flotante minimalista de línea fina + Tipo + Nombre del lugar */}
                 <div className="flex flex-col items-center space-y-1.5">
@@ -207,8 +207,8 @@ export default function LocationsBlock({
 
       {/* 4. PIE DE PÁGINA */}
       <footer className="relative z-10 w-full flex flex-col items-center pb-4 md:pb-6">
-        <div className="w-[1px] h-6 bg-gradient-to-b from-transparent via-potatoes/40 to-transparent mb-2" />
-        <span className="font-serif italic text-xs md:text-sm text-potatoes/60 tracking-wider">
+        <div className="w-[1px] h-6 bg-gradient-to-b from-transparent via-mulledwine/40 to-transparent mb-2" />
+        <span className="font-serif italic text-xs md:text-sm text-mulledwine/60 tracking-wider">
           With Love, Always
         </span>
       </footer>

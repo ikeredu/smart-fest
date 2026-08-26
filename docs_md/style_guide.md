@@ -61,6 +61,16 @@ Utilizado para oscurecer videos e imágenes cinematográficas en portadas, permi
 Para evocar una invitación física impresa, los bloques principales deben estar contenidos dentro de un marco sutil:
 *   **Estilo:** `border border-potatoes/20` o `border-artichoke/20` con un espaciado (`padding`) generoso.
 
+### 4. Patrón "Combo Editorial" (Legibilidad en Bloques Oscuros/Planos)
+Para garantizar una homogeneidad visual y legibilidad impecable en bloques que usan texto flotante sobre imágenes fotográficas oscurecidas (como `ParentsBlock` y `DressAndGiftsBlock`), se DEBE implementar el siguiente patrón estricto sin usar tarjetas (cards):
+1. **Spotlight Base:** Incluir siempre un div de sombra difuminada detrás del contenedor de texto flex central:
+   `<div className="absolute inset-0 bg-black/45 blur-[80px] -z-10 rounded-[100%] scale-[1.3] md:scale-[1.8] pointer-events-none" />`
+2. **Opacidad Nula:** Está PROHIBIDO usar transparencias medias en textos (ej. `text-potatoes/60`). Todo el texto principal debe ser cercano al 100% opaco (`text-potatoes`).
+3. **Sombras Pesadas:** 
+   - Títulos principales (Serif): `drop-shadow-[0_4px_8px_rgba(0,0,0,0.85)]`
+   - Textos secundarios y leyendas (Sans): `drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]` o `drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]`
+4. **Pesos Tipográficos:** Reforzar las fuentes secundarias con `font-medium` o `font-bold` para combatir el fondo visual y mantener solidez cromática.
+
 ---
 
 ## 🎬 Multimedia e Interacciones

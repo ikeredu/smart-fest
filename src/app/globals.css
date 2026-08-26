@@ -66,6 +66,39 @@ body {
   }
 }
 
+/* Animaciones del Cover / Hero */
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes slow-zoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+@keyframes gentle-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+@keyframes swipe-hint {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+@theme {
+  --animate-fade-in-up: fade-in-up 1s ease-out forwards;
+  --animate-slow-zoom: slow-zoom 20s linear forwards;
+  --animate-gentle-float: gentle-float 3s ease-in-out infinite alternate;
+  --animate-swipe-hint: swipe-hint 2s ease-in-out infinite;
+}
+
+/* Utilidad para delays de animación (Tailwind 4) */
+.delay-100 { animation-delay: 100ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-900 { animation-delay: 900ms; }
+
 .glass-dark {
   background-color: rgba(61, 0, 0, 0.40);
   backdrop-filter: blur(24px);

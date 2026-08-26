@@ -22,7 +22,7 @@
       "title": "David & Alejandra",
       "subtitle": "Acompáñanos a celebrar nuestro gran día",
       "date": "2026-09-19T19:00:00",
-      "backgroundImage": "/images/foto_novios.avif",
+      "backgroundImage": "/images/foto_novios.jpeg",
       "effects": {
         "glowEffect": true
       }
@@ -50,7 +50,7 @@
       },
       "invitationMessage": "Tienen el honor de invitarle a la celebración de su matrimonio, uniendo dos historias en un solo camino de amor.",
       "yearText": "",
-      "backgroundImage": "/images/arbol.png"
+      "backgroundImage": "/images/fondo_padres.jpg"
     },
     {
       "_type": "locationsBlock",
@@ -59,23 +59,43 @@
       "backgroundImage": "/images/igles.jpg",
       "locations": [
         {
-          "id": "loc_ceremony",
+          "id": "loc-1",
           "type": "ceremony",
           "title": "Ceremonia Religiosa",
-          "venueName": "Parroquia de San Miguel Arcángel",
-          "time": "17:00 HRS",
-          "address": "Av. Universidad #120, Col. Centro, Querétaro, Qro.",
-          "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=Parroquia+de+San+Miguel+Arcangel+Queretaro"
+          "venueName": "Iglesia Cristo Resucitado",
+          "time": "18:00 HRS",
+          "address": "Agua Dulce, Veracruz",
+          "mapsUrl": "https://maps.app.goo.gl/rAk2SNsXb57KHqWz5"
         },
         {
-          "id": "loc_reception",
+          "id": "loc-2",
           "type": "reception",
-          "title": "Recepción & Fiesta",
-          "venueName": "Hacienda Las Campanas",
-          "time": "19:30 HRS",
-          "address": "Carretera a Celaya Km 8.5, Querétaro, Qro.",
-          "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=Hacienda+Las+Campanas+Queretaro"
+          "title": "Recepción",
+          "venueName": "Salón Tovenbu",
+          "time": "19:00 HRS",
+          "address": "Diez Ordaz, 96690 Agua Dulce, Ver.",
+          "mapsUrl": "https://maps.app.goo.gl/MSGB5jbkaLHc8vBb6"
         }
+      ]
+    },
+    {
+      "_type": "dressAndGiftsBlock",
+      "backgroundImage": "/images/fondo_dress_code.jpg",
+      "dressCodeTitle": "Código de Vestimenta",
+      "dressCodeSubtitle": "Formal",
+      "mensDressCode": "Les invitamos a vestir con su mejor estilo formal para acompañar la elegancia de la noche.",
+      "womensDressCode": "Les invitamos a lucir sus mejores galas en vestido largo o de noche.",
+      "giftsTitle": "Mesa de Regalos",
+      "giftsDescription": "Tu presencia es el mejor regalo, pero si deseas tener un detalle con nosotros, agradecemos regalo en efectivo."
+    },
+    {
+      "_type": "galleryBlock",
+      "title": "Nuestros Momentos",
+      "images": [
+        "/images/carrusel/boda1.jpeg",
+        "/images/carrusel/boda2.jpeg",
+        "/images/carrusel/boda3.jpeg",
+        "/images/carrusel/boda4.jpeg"
       ]
     },
     {

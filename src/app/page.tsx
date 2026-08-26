@@ -6,6 +6,8 @@ import CoverBlock from '@/blocks/CoverBlock';
 import ParentsBlock from '@/blocks/ParentsBlock';
 import LocationsBlock from '@/blocks/LocationsBlock';
 import RSVPBlock from '@/blocks/RSVPBlock';
+import DressAndGiftsBlock from '@/blocks/DressAndGiftsBlock';
+import GalleryBlock from '@/blocks/GalleryBlock';
 import PetalShower from '@/components/PetalShower';
 import invitationData from '@/mocks/invitation.json';
 import { AnyBlockData } from '@/types/blocks';
@@ -56,6 +58,12 @@ export default function Home() {
 
           case 'rsvpBlock':
             return <RSVPBlock key={index} id={`block-${index}`} {...block} />;
+
+          case 'dressAndGiftsBlock':
+            return <DressAndGiftsBlock key={index} {...block} />;
+          
+          case 'galleryBlock':
+            return <GalleryBlock key={index} {...block} />;
           
           default:
             // Si viene un bloque desconocido, lo omitimos con gracia

@@ -16,14 +16,14 @@ export default function ParentsBlock({
   groomFullName,
   invitationMessage,
   yearText = 'Dos Mil Veintiséis',
-  backgroundImage = '/images/arbol.png',
+  backgroundImage = '/images/fondo_padres.jpg',
 }: ParentsBlockProps) {
   return (
     <section
       id={id}
       className="relative w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes"
     >
-      {/* 1. Fondo de Pantalla Completa: Fotografía del Árbol + Velo Completo de Cristal Verde Botánico Oscuro (recortado a inset-0) */}
+      {/* 1. Fondo de Pantalla Completa: Fotografía + Velo de Cristal Verde Botánico Oscuro (idéntico a DressCode) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -31,48 +31,52 @@ export default function ParentsBlock({
           alt="Árbol al Atardecer"
           className="w-full h-full object-cover origin-center scale-105"
         />
-        {/* Velo de Cristal Verde Botánico Oscuro acotado estrictamente a inset-0 */}
-        <div className="absolute inset-0 bg-[#1D261C]/70 backdrop-blur-[14px]" />
+        {/* Velo de Cristal Verde Botánico Oscuro (idéntico a DressCode) */}
+        <div className="absolute inset-0 glass-botanical-dark border-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
       </div>
 
       {/* 2. ENCABEZADO SUPERIOR (Sin contenedor de tarjeta) */}
       <header className="relative z-10 w-full flex flex-col items-center pt-2 md:pt-4 animate-fade-in-up">
-        <span className="font-sans text-[11px] md:text-xs uppercase tracking-[0.25em] font-semibold text-potatoes/80 mb-3 drop-shadow-sm">
+        <span className="font-sans text-[11px] md:text-xs uppercase tracking-[0.25em] font-bold text-potatoes mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           {headerLabel}
         </span>
         {/* Divisor Fino Vertical */}
-        <div className="w-[1px] h-10 md:h-12 bg-gradient-to-b from-transparent via-potatoes/40 to-transparent" />
+        <div className="w-[1px] h-10 md:h-12 bg-gradient-to-b from-transparent via-potatoes/60 to-transparent" />
       </header>
 
       {/* 3. CONTENIDO PRINCIPAL (Flotando directamente sobre el Cristal de Pantalla Completa) */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-4 py-2">
+      <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-4 py-8">
+        
+        {/* SPOTLIGHT INVISIBLE: Sombra difuminada detrás del texto para garantizar legibilidad impecable */}
+        <div className="absolute inset-0 bg-black/45 blur-[80px] -z-10 rounded-[100%] scale-[1.3] md:scale-[1.8] pointer-events-none" />
+
         {/* Contenedor Responsivo: Grid de 1 columna en móvil y 3 columnas en desktop */}
         <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-8 mb-6 md:mb-8">
 
           {/* Bloque 1: La Novia y sus padres */}
           <div className="flex flex-col items-center text-center space-y-3">
             <div className="flex flex-col items-center">
-              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes/60 font-semibold mb-1">
+              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes font-bold mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 La Novia
               </span>
-              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-potatoes font-bold leading-snug drop-shadow-sm">
+              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-potatoes font-bold leading-snug drop-shadow-[0_4px_8px_rgba(0,0,0,0.85)]">
                 <span className="italic font-normal">{brideFullName.firstName}</span>
                 <br />
                 {brideFullName.lastName}
               </h3>
             </div>
 
-            <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-potatoes/70 italic">
+            <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-potatoes/95 italic font-medium drop-shadow-md">
               Con la bendición de
             </span>
 
             <div className="space-y-0.5">
-              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+              <p className="font-sans text-sm md:text-base font-medium text-potatoes drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]">
                 {brideParents.father}
               </p>
-              <p className="font-sans text-xs text-potatoes/50 italic">&</p>
-              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+              <p className="font-sans text-xs text-potatoes/80 italic font-medium drop-shadow-sm">&</p>
+              <p className="font-sans text-sm md:text-base font-medium text-potatoes drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]">
                 {brideParents.mother}
               </p>
             </div>
@@ -81,38 +85,38 @@ export default function ParentsBlock({
           {/* Divisor Central Responsivo */}
           <div className="flex md:flex-col items-center justify-center py-2 md:py-0">
             {/* Línea horizontal en móvil, vertical en desktop */}
-            <div className="h-[1px] w-12 md:w-[1px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-transparent to-potatoes/40" />
+            <div className="h-[1px] w-12 md:w-[1px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-transparent to-potatoes/60" />
 
-            <span className="font-serif italic text-2xl md:text-3xl text-potatoes/60 mx-4 md:my-3 select-none">
+            <span className="font-serif italic text-2xl md:text-3xl text-potatoes/90 mx-4 md:my-3 select-none drop-shadow-md">
               &
             </span>
 
-            <div className="h-[1px] w-12 md:w-[1px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-potatoes/40 to-transparent" />
+            <div className="h-[1px] w-12 md:w-[1px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-potatoes/60 to-transparent" />
           </div>
 
           {/* Bloque 2: El Novio y sus padres */}
           <div className="flex flex-col items-center text-center space-y-3">
             <div className="flex flex-col items-center">
-              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes/60 font-semibold mb-1">
+              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-potatoes font-bold mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 El Novio
               </span>
-              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-potatoes font-bold leading-snug drop-shadow-sm">
+              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-potatoes font-bold leading-snug drop-shadow-[0_4px_8px_rgba(0,0,0,0.85)]">
                 <span className="italic font-normal">{groomFullName.firstName}</span>
                 <br />
                 {groomFullName.lastName}
               </h3>
             </div>
 
-            <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-potatoes/70 italic">
+            <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-potatoes/95 italic font-medium drop-shadow-md">
               Con la bendición de
             </span>
 
             <div className="space-y-0.5">
-              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+              <p className="font-sans text-sm md:text-base font-medium text-potatoes drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]">
                 {groomParents.father}
               </p>
-              <p className="font-sans text-xs text-potatoes/50 italic">&</p>
-              <p className="font-sans text-sm md:text-base font-normal text-potatoes drop-shadow-sm">
+              <p className="font-sans text-xs text-potatoes/80 italic font-medium drop-shadow-sm">&</p>
+              <p className="font-sans text-sm md:text-base font-medium text-potatoes drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]">
                 {groomParents.mother}
               </p>
             </div>
@@ -122,8 +126,8 @@ export default function ParentsBlock({
 
         {/* Mensaje de Invitación */}
         <div className="w-full max-w-xs md:max-w-md mx-auto">
-          <div className="w-[1px] h-8 mx-auto mb-4 bg-gradient-to-b from-transparent via-potatoes/35 to-transparent" />
-          <p className="font-sans text-xs md:text-sm italic text-potatoes/90 leading-relaxed font-normal">
+          <div className="w-[1px] h-8 mx-auto mb-4 bg-gradient-to-b from-transparent via-potatoes/50 to-transparent" />
+          <p className="font-sans text-xs md:text-sm italic text-potatoes leading-relaxed font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             {invitationMessage}
           </p>
         </div>
@@ -131,8 +135,8 @@ export default function ParentsBlock({
 
       {/* 4. PIE DE PÁGINA */}
       <footer className="relative z-10 w-full flex flex-col items-center pb-2 md:pb-4">
-        <div className="w-[1px] h-8 md:h-10 bg-gradient-to-b from-transparent via-potatoes/40 to-transparent mb-2" />
-        <p className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-semibold text-potatoes/60">
+        <div className="w-[1px] h-8 md:h-10 bg-gradient-to-b from-transparent via-potatoes/60 to-transparent mb-2" />
+        <p className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold text-potatoes drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           {yearText}
         </p>
       </footer>

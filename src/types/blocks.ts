@@ -109,6 +109,33 @@ export const LocationsBlockSchema = z.object({
 
 export type LocationsBlockData = z.infer<typeof LocationsBlockSchema>;
 
+// 9. Definimos el esquema para el bloque unificado de Vestimenta y Regalos
+export const DressAndGiftsBlockSchema = z.object({
+  _type: z.literal('dressAndGiftsBlock'),
+  backgroundImage: z.string().optional(),
+  
+  // Dress Code
+  dressCodeTitle: z.string().default('Código de Vestimenta'),
+  dressCodeSubtitle: z.string().default('Formal'),
+  mensDressCode: z.string().default('Sugerimos traje oscuro o de etiqueta para acompañar la elegancia de la noche.'),
+  womensDressCode: z.string().default('Les invitamos a lucir sus mejores galas en vestido largo o de noche.'),
+  
+  // Gifts
+  giftsTitle: z.string().default('Mesa de Regalos'),
+  giftsDescription: z.string().default('Tu presencia es el mejor regalo, pero si deseas tener un detalle con nosotros, agradecemos regalo en efectivo.'),
+});
+
+export type DressAndGiftsBlockData = z.infer<typeof DressAndGiftsBlockSchema>;
+
+// 10. Definimos el esquema para el bloque de Galería (Carrusel de imágenes)
+export const GalleryBlockSchema = z.object({
+  _type: z.literal('galleryBlock'),
+  title: z.string().default('Nuestros Momentos'),
+  images: z.array(z.string().url().or(z.string().startsWith('/'))),
+});
+
+export type GalleryBlockData = z.infer<typeof GalleryBlockSchema>;
+
 // Conforme agreguemos más bloques (Ubicación, Formulario), los uniremos aquí:
 export const AnyBlockSchema = z.discriminatedUnion('_type', [
   HeroBlockSchema,
@@ -117,8 +144,9 @@ export const AnyBlockSchema = z.discriminatedUnion('_type', [
   ParentsBlockSchema,
   RSVPBlockSchema,
   LocationsBlockSchema,
+  DressAndGiftsBlockSchema,
+  GalleryBlockSchema,
 ]);
 
 export type AnyBlockData = z.infer<typeof AnyBlockSchema>;
-
 
