@@ -21,7 +21,7 @@ export default function ParentsBlock({
   return (
     <section
       id={id}
-      className="relative w-full min-h-screen flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center px-4 py-8 md:py-12 text-center select-none bg-black text-potatoes overflow-hidden"
     >
       {/* 1. Fondo de Pantalla Completa: Fotografía + Velo de Cristal Verde Botánico Oscuro (idéntico a DressCode) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
