@@ -30,9 +30,9 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${playfair.variable} ${plusJakarta.variable} h-full antialiased overflow-x-hidden w-full max-w-[100vw]`}
+      className={`${playfair.variable} ${plusJakarta.variable} antialiased overflow-x-hidden w-full max-w-[100vw]`}
     >
-      <body className="min-h-full flex flex-col font-sans transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
+      <body className="flex flex-col font-sans transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw]">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

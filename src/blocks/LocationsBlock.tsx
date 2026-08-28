@@ -91,7 +91,7 @@ export default function LocationsBlock({
   return (
     <section
       id={id}
-      className="relative w-full h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-potatoes text-mulledwine overflow-hidden transform translate-x-0"
+      className="relative w-full min-h-[100svh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-potatoes text-mulledwine overflow-hidden"
     >
       {/* 1. Fondo de Pantalla Completa con Velo Luminoso */}
       <div className="absolute inset-0 z-0 overflow-hidden">

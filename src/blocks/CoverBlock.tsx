@@ -63,7 +63,7 @@ export default function CoverBlock({
   return (
     <section 
       id="block-0"
-      className="relative flex flex-col justify-between items-center w-full min-h-[100dvh] py-8 md:py-12 text-center overflow-hidden select-none bg-black"
+      className="relative flex flex-col justify-between items-center w-full min-h-[100svh] py-8 md:py-12 text-center overflow-hidden select-none bg-black"
     >
       {/* Widget de Música Embebido en la Portada (fijo en top-right de este bloque) */}
       {musicUrl && (
