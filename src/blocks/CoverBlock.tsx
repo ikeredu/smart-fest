@@ -55,6 +55,8 @@ export default function CoverBlock({
     }
   };
 
+  const [isVideoReady, setIsVideoReady] = React.useState(false);
+
   // Separamos el título para aplicar la clase itálica a la última palabra
   const words = title.split(' ');
   const firstPart = words.slice(0, -1).join(' ');
@@ -70,14 +72,30 @@ export default function CoverBlock({
         <MusicWidget url={musicUrl} autoplay={musicAutoplay} coverImage={musicCoverImage} />
       )}
       
-      {/* Video de Fondo Directo */}
-      <div className="absolute inset-0 z-0">
+      {/* Capa de Fondo: Poster Inmediato + Video Streaming con Crossfade */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* 1. Imagen Poster Ultraligera (< 70 KB) para First Paint instantáneo (< 100ms) */}
+        <picture className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${isVideoReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <source srcSet="/images/cover_poster_desktop.webp" media="(min-width: 768px)" type="image/webp" />
+          <img
+            src="/images/cover_poster_mobile.webp"
+            alt="Fondo Portada"
+            fetchPriority="high"
+            className="w-full h-full object-cover"
+          />
+        </picture>
+
+        {/* 2. Video de Fondo Optimizado con FastStart y Pseudo-Streaming */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover scale-100 transition-transform duration-10000 ease-out animate-slow-zoom"
+          preload="auto"
+          poster="/images/cover_poster_mobile.webp"
+          onPlaying={() => setIsVideoReady(true)}
+          onLoadedData={() => setIsVideoReady(true)}
+          className={`w-full h-full object-cover scale-100 transition-opacity duration-1000 ease-in-out ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
         >
           {/* Video en HD panorámico para laptops y escritorios */}
           <source src="/videos/vid_principal_desktop.mp4" type="video/mp4" media="(min-width: 768px)" />
