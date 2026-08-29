@@ -123,7 +123,7 @@ export default function GalleryBlock({
 
   return (
     <section 
-      className="relative w-full h-[100dvh] min-h-[100dvh] bg-black overflow-hidden select-none"
+      className="relative w-full min-h-[100svh] h-[100svh] bg-black overflow-hidden select-none touch-pan-y"
     >
       {/* 1. Track del Carrusel Cinematográfico Acelerado por GPU */}
       <div 

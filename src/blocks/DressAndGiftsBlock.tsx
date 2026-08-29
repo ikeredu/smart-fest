@@ -14,7 +14,7 @@ export default function DressAndGiftsBlock({
 }: DressAndGiftsBlockData) {
   return (
     <section 
-      className="relative w-full min-h-screen h-[100dvh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-black text-potatoes overflow-hidden transform translate-x-0"
+      className="relative w-full min-h-[100svh] flex flex-col justify-between items-center px-4 py-6 md:py-10 text-center select-none bg-black text-potatoes overflow-hidden"
     >
       {/* 1. Fondo de Pantalla Completa con Velo Botánico Oscuro Oficial */}
       {backgroundImage && (
