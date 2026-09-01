@@ -40,9 +40,59 @@ export default function EventOverviewTab({
       ? Math.round((metrics.totalDeclinedPasses / metrics.totalPassesAllocated) * 100)
       : 0;
 
+  const formattedDate = event.event_date
+    ? new Date(event.event_date).toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : 'Sin fecha programada';
+
   return (
     <div className="space-y-6 animate-fade-in-up">
-      {/* 1. Tarjeta Principal de Salud de Aforo y Progreso */}
+      {/* 1. Banner Principal del Evento (Solo vive en esta pestaña) */}
+      <section className="bg-[var(--bg-card)] rounded-2xl p-6 sm:p-8 border border-emerald-500/30 dark:border-emerald-500/40 shadow-sm transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-1.5 max-w-xl">
+          <div className="flex items-center space-x-2">
+            <span className="text-[11px] uppercase tracking-wider font-semibold text-emerald-600 dark:text-emerald-400">
+              Panel del Evento
+            </span>
+            <span className="text-[10px] uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20 font-semibold">
+              Activo
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--text-main)]">
+            {event.title}
+          </h1>
+          <p className="text-xs sm:text-sm text-[var(--text-muted)] flex items-center space-x-2">
+            <span>📅 {formattedDate}</span>
+            <span>•</span>
+            <span className="font-mono">/{event.slug}</span>
+          </p>
+        </div>
+
+        {/* Acciones Rápidas del Banner */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={onCopyLink}
+            className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer active:scale-95 shadow-sm"
+            title="Copiar enlace general de la invitación"
+          >
+            <span>{copied ? '✓ ¡Copiado!' : '🔗 Enlace General'}</span>
+          </button>
+
+          <Link
+            href={`/${event.slug}`}
+            target="_blank"
+            className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer active:scale-95 shadow-sm"
+          >
+            <span>👁️ Ver Invitación</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* 2. Tarjeta de Salud de Aforo y Progreso Porcentual */}
       <section className="bg-[var(--bg-card)] rounded-2xl p-6 sm:p-8 border border-emerald-500/30 dark:border-emerald-500/40 shadow-sm transition-all duration-300 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
@@ -119,10 +169,10 @@ export default function EventOverviewTab({
         </div>
       </section>
 
-      {/* 2. Grid de KPIs de Aforo */}
+      {/* 3. Grid de KPIs de Aforo */}
       <GuestStats metrics={metrics} />
 
-      {/* 3. Tarjeta de Accesos Directos & Gestión */}
+      {/* 4. Tarjeta de Acceso a Invitados */}
       <section className="bg-[var(--bg-card)] rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="space-y-1 text-center sm:text-left">
           <h3 className="text-sm font-bold text-[var(--text-main)]">
@@ -133,32 +183,14 @@ export default function EventOverviewTab({
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
-          <button
-            type="button"
-            onClick={onCopyLink}
-            className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-95"
-          >
-            <span>{copied ? '✓ ¡Copiado!' : '🔗 Copiar Enlace'}</span>
-          </button>
-
-          <Link
-            href={`/${event.slug}`}
-            target="_blank"
-            className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-95"
-          >
-            <span>👁️ Ver Invitación</span>
-          </Link>
-
-          <button
-            type="button"
-            onClick={onNavigateToGuests}
-            className="py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md hover:shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer flex items-center space-x-1.5"
-          >
-            <span>👥 Ver Invitados</span>
-            <span>&rarr;</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onNavigateToGuests}
+          className="py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md hover:shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer flex items-center space-x-1.5 shrink-0"
+        >
+          <span>👥 Ver Lista de Invitados</span>
+          <span>&rarr;</span>
+        </button>
       </section>
     </div>
   );
