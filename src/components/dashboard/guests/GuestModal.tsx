@@ -1,6 +1,6 @@
-﻿'use client';
+'use client';
 
-import React, { useState, useEffect, useTransition } from 'react';
+import React, { useState, useTransition } from 'react';
 import type { Guest, GuestStatus } from '@/types/guest';
 import { createGuestAction, updateGuestAction } from '@/app/dashboard/events/[id]/guests/guestsActions';
 
@@ -12,52 +12,33 @@ interface GuestModalProps {
   onSuccess?: (msg: string) => void;
 }
 
-export default function GuestModal({
-  isOpen,
+interface GuestModalInnerProps {
+  onClose: () => void;
+  eventId: string;
+  guestToEdit?: Guest | null;
+  onSuccess?: (msg: string) => void;
+}
+
+function GuestModalInner({
   onClose,
   eventId,
   guestToEdit,
   onSuccess,
-}: GuestModalProps) {
+}: GuestModalInnerProps) {
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Form states
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [passesAllocated, setPassesAllocated] = useState(2);
-  const [passesConfirmed, setPassesConfirmed] = useState(0);
-  const [status, setStatus] = useState<GuestStatus>('pending');
-  const [notes, setNotes] = useState('');
+  // Form states inicializados directamente desde las props (sin useEffect)
+  const [firstName, setFirstName] = useState(guestToEdit?.first_name || '');
+  const [lastName, setLastName] = useState(guestToEdit?.last_name || '');
+  const [phone, setPhone] = useState(guestToEdit?.phone || '');
+  const [email, setEmail] = useState(guestToEdit?.email || '');
+  const [passesAllocated, setPassesAllocated] = useState(guestToEdit?.passes_allocated || 2);
+  const [passesConfirmed, setPassesConfirmed] = useState(guestToEdit?.passes_confirmed || 0);
+  const [status, setStatus] = useState<GuestStatus>(guestToEdit?.status || 'pending');
+  const [notes, setNotes] = useState(guestToEdit?.notes || '');
 
   const isEditing = !!guestToEdit;
-
-  useEffect(() => {
-    if (guestToEdit) {
-      setFirstName(guestToEdit.first_name || '');
-      setLastName(guestToEdit.last_name || '');
-      setPhone(guestToEdit.phone || '');
-      setEmail(guestToEdit.email || '');
-      setPassesAllocated(guestToEdit.passes_allocated || 1);
-      setPassesConfirmed(guestToEdit.passes_confirmed || 0);
-      setStatus(guestToEdit.status || 'pending');
-      setNotes(guestToEdit.notes || '');
-    } else {
-      setFirstName('');
-      setLastName('');
-      setPhone('');
-      setEmail('');
-      setPassesAllocated(2);
-      setPassesConfirmed(0);
-      setStatus('pending');
-      setNotes('');
-    }
-    setErrorMessage(null);
-  }, [guestToEdit, isOpen]);
-
-  if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -309,5 +290,25 @@ export default function GuestModal({
         </form>
       </div>
     </div>
+  );
+}
+
+export default function GuestModal({
+  isOpen,
+  onClose,
+  eventId,
+  guestToEdit,
+  onSuccess,
+}: GuestModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <GuestModalInner
+      key={guestToEdit?.id ?? 'create-guest'}
+      onClose={onClose}
+      eventId={eventId}
+      guestToEdit={guestToEdit}
+      onSuccess={onSuccess}
+    />
   );
 }

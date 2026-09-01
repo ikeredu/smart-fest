@@ -6,12 +6,21 @@ import EventCard from './EventCard';
 import CreateEventModal from './CreateEventModal';
 import ThemeToggle from './ThemeToggle';
 
+interface EventItem {
+  id: string;
+  title: string;
+  slug: string;
+  event_date: string | null;
+  created_at: string;
+  config?: unknown;
+}
+
 interface DashboardClientProps {
   userEmail: string;
   userName: string;
   userRole: string;
   avatarUrl?: string | null;
-  events: any[];
+  events: EventItem[];
 }
 
 export default function DashboardClient({

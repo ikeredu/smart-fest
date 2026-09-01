@@ -31,10 +31,7 @@ export default function PetalShower({ isActive, onComplete }: PetalShowerProps) 
   const [particles, setParticles] = useState<PetalParticle[]>([]);
 
   useEffect(() => {
-    if (!isActive) {
-      setParticles([]);
-      return;
-    }
+    if (!isActive) return;
 
     // Generar 44 partículas organizadas en 3 ráfagas/olas de viento consecutivas
     const wave1Count = 16;
@@ -70,7 +67,9 @@ export default function PetalShower({ isActive, onComplete }: PetalShowerProps) 
       };
     });
 
-    setParticles(generatedParticles);
+    const rafId = requestAnimationFrame(() => {
+      setParticles(generatedParticles);
+    });
 
     // Limpieza tras completar las 3 ráfagas de viento (8.5s)
     const timer = setTimeout(() => {
@@ -78,7 +77,10 @@ export default function PetalShower({ isActive, onComplete }: PetalShowerProps) 
       if (onComplete) onComplete();
     }, 8500);
 
-    return () => clearTimeout(timer);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timer);
+    };
   }, [isActive, onComplete]);
 
   if (!isActive || particles.length === 0) return null;

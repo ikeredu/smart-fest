@@ -1,15 +1,18 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
-import EventManageClient from '@/components/dashboard/event/EventManageClient';
+import EventManageClient, { EventTabType } from '@/components/dashboard/event/EventManageClient';
 import type { Metadata } from 'next';
 
-interface GuestsPageProps {
+interface EventPageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams?: Promise<{
+    tab?: string;
+  }>;
 }
 
-export async function generateMetadata({ params }: GuestsPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
   const { id } = await params;
   const supabase = await createClient();
 
@@ -20,12 +23,18 @@ export async function generateMetadata({ params }: GuestsPageProps): Promise<Met
     .single();
 
   return {
-    title: event ? `Invitados: ${event.title} | Smart-Fest` : 'Gestión de Invitados | Smart-Fest',
+    title: event ? `Gestionar: ${event.title} | Smart-Fest` : 'Panel de Evento | Smart-Fest',
   };
 }
 
-export default async function GuestsPage({ params }: GuestsPageProps) {
+export default async function EventHubPage({ params, searchParams }: EventPageProps) {
   const { id } = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const rawTab = resolvedSearchParams.tab;
+
+  const initialTab: EventTabType =
+    rawTab === 'guests' ? 'guests' : rawTab === 'settings' ? 'settings' : 'overview';
+
   const supabase = await createClient();
 
   const {
@@ -36,7 +45,7 @@ export default async function GuestsPage({ params }: GuestsPageProps) {
     redirect('/login');
   }
 
-  // 1. Obtener perfil de usuario
+  // 1. Obtener perfil
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
@@ -59,7 +68,7 @@ export default async function GuestsPage({ params }: GuestsPageProps) {
       ? 'Planner'
       : 'Anfitrión';
 
-  // 2. Obtener datos del evento validando pertenencia al usuario
+  // 2. Obtener datos del evento validando pertenencia
   const { data: event, error: eventError } = await supabase
     .from('events')
     .select('id, title, slug, event_date')
@@ -71,7 +80,7 @@ export default async function GuestsPage({ params }: GuestsPageProps) {
     notFound();
   }
 
-  // 3. Obtener lista de invitados del evento
+  // 3. Obtener lista de invitados
   const { data: guests } = await supabase
     .from('guests')
     .select('*')
@@ -87,7 +96,7 @@ export default async function GuestsPage({ params }: GuestsPageProps) {
       userName={userName}
       userRole={userRole}
       avatarUrl={avatarUrl}
-      initialTab="guests"
+      initialTab={initialTab}
     />
   );
 }

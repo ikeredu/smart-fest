@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useTransition, useMemo } from 'react';
 import Link from 'next/link';
@@ -39,7 +39,7 @@ export default function GuestsDashboardClient({
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [generalCopied, setGeneralCopied] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
