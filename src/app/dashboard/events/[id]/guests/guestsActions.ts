@@ -1,4 +1,4 @@
-﻿'use server';
+'use server';
 
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
@@ -114,7 +114,7 @@ export async function updateGuestAction(guestId: string, eventId: string, formDa
     return { error: 'No autorizado.' };
   }
 
-  const updatePayload: Record<string, any> = {
+  const updatePayload: Record<string, string | number | null> = {
     first_name: firstName,
     last_name: lastName,
     phone: phone,

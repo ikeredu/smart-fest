@@ -6,6 +6,9 @@ import CoverBlock from '@/blocks/CoverBlock';
 import ParentsBlock from '@/blocks/ParentsBlock';
 import LocationsBlock from '@/blocks/LocationsBlock';
 import RSVPBlock from '@/blocks/RSVPBlock';
+import DressAndGiftsBlock from '@/blocks/DressAndGiftsBlock';
+import GalleryBlock from '@/blocks/GalleryBlock';
+import EventDetailsBlock from '@/blocks/EventDetailsBlock';
 import PetalShower from '@/components/PetalShower';
 import { AnyBlockData } from '@/types/blocks';
 
@@ -68,7 +71,16 @@ export default function InvitationClient({ config }: InvitationClientProps) {
 
           case 'rsvpBlock':
             return <RSVPBlock key={index} id={`block-${index}`} {...block} />;
-          
+
+          case 'dressAndGiftsBlock':
+            return <DressAndGiftsBlock key={index} {...block} />;
+
+          case 'galleryBlock':
+            return <GalleryBlock key={index} {...block} />;
+
+          case 'eventDetailsBlock':
+            return <EventDetailsBlock key={index} {...block} />;
+
           default:
             return null;
         }
