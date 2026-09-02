@@ -1,6 +1,6 @@
 ---
 name: smart-fest-floating-surface
-description: Estándar obligatorio de arquitectura y diseño para popovers y superficies flotantes en Smart-Fest. Garantiza anclaje directo al botón disparador, separación homogénea de capas con telón scrim mediante React Portals, diseño responsivo unificado y accesibilidad WAI-ARIA.
+description: Estándar obligatorio de arquitectura y diseño para popovers y superficies flotantes en Smart-Fest. Garantiza anclaje directo con pico conector (caret), borde institucional esmeralda continuo, esbeltez geométrica (anti-regordete), separación homogénea con scrim ligero y accesibilidad WAI-ARIA.
 ---
 
 # Estándar Oficial de Popovers y Superficies Flotantes (Smart-Fest)
@@ -9,79 +9,97 @@ Este documento define la arquitectura técnica y los estándares de diseño mand
 
 ---
 
-## 1. El Principio Fundamental: Popover Anclado Puro
+## 1. El Principio Fundamental: Popover Anclado con Pico Conector (*Caret / Beak*)
 
 > [!IMPORTANT]
 > **Regla de Oro de Anclaje:**
-> **Todo Popover debe nacer y desprenderse DIRECTAMENTE desde el elemento que lo detonó (el botón disparador), tanto en pantallas móviles como de escritorio.**
+> **Todo Popover debe nacer y proyectarse DIRECTAMENTE desde el elemento que lo detonó (el botón disparador), tanto en pantallas móviles como de escritorio.**
 > Queda estrictamente prohibido secuestrar la pantalla móvil con hojas inferiores (*bottom sheets*) o cajones invasivos cuando el usuario solo espera un menú contextual o de perfil anclado a su botón.
 
 ```text
-┌─────────────────────────────────────────────────────────┐
-│ Smart-Fest [ANFITRIÓN]                       [Botón ▾]  │ <-- Trigger
-└────────────────────────────────────────────────────┬────┘
-                                                     │
-                             ┌───────────────────────┴────┐
-                             │  POPOVER ANCLADO           │ <-- Nace directamente aquí
-                             │  absolute top-full right-0 │
-                             │  w-72 max-w-[calc(100vw-2rem)]
-                             │  bg-[var(--bg-card)]/95    │
-                             │  backdrop-blur-md          │
-                             │  shadow-2xl border         │
-                             └────────────────────────────┘
+               ┌──────────┐
+               │  Trigger │ <-- Botón Disparador activo (border-emerald-500/40)
+               └────┬─────┘
+                    │
+                   ╱ ╲       <-- Pico Caret (border-t border-l border-emerald-500/30)
+ ┌────────────────┘   └────────────────┐
+ │  POPOVER ANCLADO Y ESBELTO          │ <-- Despliegue con origin-top-right
+ │  w-64 max-w-[calc(100vw-2rem)]      │
+ │  bg-[var(--bg-card)]/95             │
+ │  backdrop-blur-md                   │
+ │  border-emerald-500/30              │
+ └─────────────────────────────────────┘
 ```
 
 ---
 
-## 2. Homogeneización y Separación de Capas (El Scrim con Portal)
+## 2. Intencionalidad Geométrica (Slim Axis vs. Componentes Regordetes)
 
-Para que el popover flote con claridad visual sin que el fondo compita con el menú, se aplica una **separación homogénea de capas en dos niveles**:
+Para evitar el efecto visual de "caja hinchada" o bloque cuadrado amorfo (~1:1):
+
+1. **Silueta Vertical Esbelta:**
+   - La tarjeta contenedora adopta una anchura contenida de `w-64` (256px) con un padding exterior refinado de `p-2` (evitar `p-3` o `p-4` que engordan la silueta).
+   - Su proporción general es marcadamente vertical y estilizada.
+2. **Controles Internos como Tiras Horizontales Finas:**
+   - Todo selector o elemento interno debe ser estrictamente horizontal y delgado:
+     - Selectores segmentados (ej. tema visual): Franja ultra-slim de `h-7` con padding mínimo.
+     - Filas de menú y acciones: Líneas esbeltas de `py-1.5 px-2.5 rounded-xl text-xs`.
+   - Quedan terminantemente prohibidos los bloques de botones cuadrados o inflados con *padding fat*.
+
+---
+
+## 3. Homogeneización de Bordes: Esmeralda Institucional y Pico Continuo
+
+1. **Borde Institucional Continuo:**
+   - La tarjeta flotante comparte el mismo ADN perimetral de los modales y tarjetas maestras:
+     `border border-emerald-500/30 dark:border-emerald-500/40`.
+2. **Geometría del Pico (*Caret*):**
+   - Un rombo rotado a 45° colocado en el borde superior:
+     ```tsx
+     <div className="absolute -top-1.5 right-5 w-3 h-3 rotate-45 bg-[var(--bg-card)] border-t border-l border-emerald-500/30 dark:border-emerald-500/40" />
+     ```
+   - Al usar el mismo fondo `bg-[var(--bg-card)]` y bordes selectivos superior e izquierdo, la línea horizontal se funde sin costuras hacia el botón disparador.
+3. **Divisores Interiores Inset:**
+   - Los separadores de secciones internas son sutiles, flotantes y no tocan los bordes exteriores:
+     `mx-1.5 border-t border-slate-200/80 dark:border-slate-800/80 shrink-0 my-1.5`.
+
+---
+
+## 4. Separación de Capas y Scrim Homologado (Capa Universal de Modal)
+
+Para que el popover flote con claridad visual impecable y sin que los textos del fondo compitan con su lectura, se homologa el telón con la **misma capa exacta del modal canónico**:
 
 ```text
-CAPA 3 (z-50):  Cabecera y Popover Activo (Totalmente nítidos e iluminados)
+CAPA 3 (z-50):  Cabecera y Popover Activo (Nítidos e iluminados, anclaje directo)
 ─────────────────────────────────────────────────────────────────────────────
-CAPA 2 (z-40):  Telón Scrim Global (Portal a document.body)
-                fixed inset-0 bg-black/30 backdrop-blur-xs
+CAPA 2 (z-40):  Telón Scrim Global de Modal (Portal a document.body)
+                fixed inset-0 bg-black/30 backdrop-blur-xs animate-fade-in
 ─────────────────────────────────────────────────────────────────────────────
-CAPA 1 (z-0):   Contenido de la aplicación (Atenuado uniformemente en segundo plano)
+CAPA 1 (z-0):   Contenido de la aplicación (Difuminado en penumbra suave y limpia)
 ```
 
 ### Por qué el Scrim debe montarse con `createPortal`:
 Debido al *Containing Block Trap* de CSS, si el telón `fixed inset-0` se renderizara dentro de un `<header>` con `backdrop-blur-md`, quedaría atrapado dentro de la barra.
-Montar el telón de fondo mediante `createPortal(..., document.body)` a `z-40` garantiza que:
-1. Oscurece y desenfoca suavemente todo el fondo de la pantalla de forma uniforme.
-2. Al hacer clic o tocar en cualquier parte del fondo atenuado, el popover se cierra (*light dismiss*).
+Montar el telón mediante `createPortal(..., document.body)` a `z-40` garantiza que:
+1. Permite cerrar el popover al tocar cualquier parte de la pantalla (*light dismiss* con `cursor-pointer`).
+2. Genera una atmósfera homogénea e idéntica a la de los modales (`bg-black/30 backdrop-blur-xs`), eliminando el ruido del fondo.
 3. No altera ni desubica el Popover, el cual permanece cómodamente anclado al trigger en `z-50`.
 
 ---
 
-## 3. Especificaciones Visuales de Estilo
-
-- **Contenedor del Popover:**
-  ```tsx
-  className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-2xl bg-[var(--bg-card)]/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-2xl p-3 z-50 animate-in fade-in zoom-in-95 duration-150 select-none"
-  ```
-- **Contención en Pantallas Móviles:**
-  La clase `max-w-[calc(100vw-2rem)]` evita que el popover se desborde fuera del borde izquierdo en teléfonos estrechos (320px – 375px), dejando siempre un margen de respiro de 1rem a los bordes.
-- **Telón de Fondo (*Scrim*):**
-  ```tsx
-  className="fixed inset-0 z-40 bg-black/30 backdrop-blur-xs animate-fade-in select-none cursor-pointer transition-opacity"
-  ```
-
----
-
-## 4. Comportamientos y Accesibilidad Mandatorios
+## 5. Comportamientos y Accesibilidad Mandatorios
 
 Todo popover debe implementar:
-1. **Cierre con Clic en el Fondo:** Al tocar el scrim se ejecuta `setIsOpen(false)`.
-2. **Cierre al Clic Fuera (*Click Outside*):** Listener en `document` para cerrar si se hace clic fuera del contenedor.
-3. **Cierre con Tecla `Escape`:** Listener de `keydown` global para cerrar con accesibilidad de teclado.
-4. **Contención de Eventos:** `onClick={(e) => e.stopPropagation()}` en la tarjeta del popover para evitar que interactuar con sus botones internos cierre el menú.
-5. **No Bloqueo Agresivo de Scroll:** A diferencia de un modal de formulario complejo, un popover no necesita secuestrar el scroll del navegador; solo flota y se despide al tocar fuera.
+1. **Origen de Animación Top-Right:** `origin-top-right animate-in fade-in zoom-in-95 duration-150` para que se expanda físicamente desde el botón disparador.
+2. **Cierre con Clic en el Scrim:** Al tocar el telón global se ejecuta `setIsOpen(false)`.
+3. **Cierre al Clic Fuera (*Click Outside*):** Listener `mousedown` en `document` para cerrar si se pulsa fuera de la referencia.
+4. **Cierre con Tecla `Escape`:** Listener `keydown` global para accesibilidad de teclado WAI-ARIA.
+5. **Aislamiento de Clics Internos:** `onClick={(e) => e.stopPropagation()}` en la tarjeta para evitar que interactuar con controles internos cierre el menú.
+6. **No Bloqueo de Scroll:** El scroll del navegador no se bloquea forzosamente.
 
 ---
 
-## 5. Plantilla Canónica de Código (Copy-Paste Ready)
+## 6. Plantilla Canónica de Código (Copy-Paste Ready)
 
 ```tsx
 'use client';
@@ -135,12 +153,16 @@ export default function PopoverMenu({ userName }: PopoverMenuProps) {
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="cursor-pointer flex items-center space-x-2 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        className={`cursor-pointer flex items-center space-x-2 p-1.5 rounded-full border transition-all duration-200 ${
+          isOpen
+            ? 'bg-slate-100 dark:bg-slate-800/90 border-emerald-500/40 shadow-xs'
+            : 'bg-transparent border-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/60'
+        }`}
       >
-        <span>{userName}</span>
+        <span className="text-xs font-semibold">{userName}</span>
       </button>
 
-      {/* 1. TELÓN DE FONDO (Portal a document.body para homogeneizar capas) */}
+      {/* 1. TELÓN DE FONDO (Homologado con Modales vía Portal) */}
       {isOpen && mounted && createPortal(
         <div
           className="fixed inset-0 z-40 bg-black/30 backdrop-blur-xs animate-fade-in select-none cursor-pointer transition-opacity"
@@ -150,13 +172,19 @@ export default function PopoverMenu({ userName }: PopoverMenuProps) {
         document.body
       )}
 
-      {/* 2. POPOVER ANCLADO (Nace directamente debajo del botón) */}
+      {/* 2. POPOVER ANCLADO ESBELTO CON PICO CONTINUO */}
       {isOpen && (
         <div
-          className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-2xl bg-[var(--bg-card)]/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-2xl p-3 z-50 animate-in fade-in zoom-in-95 duration-150 select-none"
+          className="absolute right-0 top-full mt-2.5 w-64 max-w-[calc(100vw-2rem)] rounded-2xl bg-[var(--bg-card)]/95 backdrop-blur-md border border-emerald-500/30 dark:border-emerald-500/40 shadow-2xl p-2 z-50 origin-top-right animate-in fade-in zoom-in-95 duration-150 select-none"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Contenido del popover */}
+          {/* PICO CONECTOR (Caret rotado a 45° con borde continuo) */}
+          <div className="absolute -top-1.5 right-5 w-3 h-3 rotate-45 bg-[var(--bg-card)] border-t border-l border-emerald-500/30 dark:border-emerald-500/40" />
+
+          {/* CONTENIDO INTERNO: FILAS Y TIRAS HORIZONTALES FINAS */}
+          <div className="relative z-10 space-y-1">
+            {/* Secciones del popover */}
+          </div>
         </div>
       )}
     </div>

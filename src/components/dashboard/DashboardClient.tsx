@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import EventCard from './EventCard';
 import CreateEventModal from './CreateEventModal';
 import DashboardHeader from './DashboardHeader';
+import { formatPersonName } from '@/lib/formatters';
 
 interface EventItem {
   id: string;
@@ -60,12 +61,12 @@ export default function DashboardClient({
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-8 md:p-10 flex flex-col space-y-8">
         {/* Welcome Card Banner (Sin el botón de nuevo evento, enfocado en el saludo y con borde verde delicado) */}
-        <section className="bg-[var(--bg-card)] rounded-2xl p-6 sm:p-8 border border-emerald-500/30 dark:border-emerald-500/40 shadow-sm transition-all duration-300">
+        <section className="bg-[var(--bg-card)] rounded-xl p-5 sm:p-6 border border-emerald-500/30 dark:border-emerald-500/40 shadow-sm transition-all duration-300">
           <span className="text-[11px] uppercase tracking-wider font-semibold text-emerald-600 dark:text-emerald-400 block">
             Panel de Control
           </span>
           <h1 className="text-2xl sm:text-3xl font-bold text-[var(--text-main)] mt-1">
-            ¡Hola, <span className="text-emerald-600 dark:text-emerald-400">{userName}</span>!
+            ¡Hola, <span className="text-emerald-600 dark:text-emerald-400">{formatPersonName(userName)}</span>!
           </h1>
           <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-1.5 max-w-xl leading-relaxed">
             Bienvenido a tu panel de administración. Desde aquí podrás gestionar tus eventos activos, personalizar tus invitaciones modulares y administrar tus invitados.

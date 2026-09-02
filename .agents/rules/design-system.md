@@ -1,4 +1,4 @@
-﻿# Reglas del Sistema de Diseño y Glassmorphism (Smart-Fest)
+# Reglas del Sistema de Diseño y Glassmorphism (Smart-Fest)
 
 Esta documentación define las directrices visuales, tokens de estilo y normas de interfaz que todo agente de IA debe cumplir en **Smart-Fest**.
 
@@ -9,9 +9,15 @@ Esta documentación define las directrices visuales, tokens de estilo y normas d
 Smart-Fest combina **elegancia editorial y modernidad traslúcida**:
 - **Slim Glassmorphism:** Superficies de cristal fino con desenfoque (`backdrop-blur-sm` / `backdrop-blur-xs`), bordes tenues (`border-slate-200/80 dark:border-slate-800/80`) y sombras suaves (`shadow-xs` / `shadow-sm`).
 - **Prohibición de Cards Chunky / Burbujas Gruesas:** Quedan prohibidas las cajas infladas con bordes toscos o tarjetas dentro de tarjetas.
+- **Principio de Intencionalidad Geométrica (Anti-Regordete):**
+  - **Eje de Intención Definido:** Si un elemento es vertical (menús, popovers, drawers), debe ser marcadamente vertical y esbelto (anchuras contenidas como `w-60` o `w-64`, con ritmo estilizado). Si un elemento o control es horizontal (filas, selectores segmentados, tiras de acciones), debe ser una franja horizontal fina y nítida (`h-7`, `h-8`, padding vertical mínimo).
+  - **Estándar de Tarjetas (Dashboard Cards):** Las tarjetas maestras (eventos, banners de bienvenida) deben usar bordes arquitectónicos `rounded-xl` (12px) en lugar de esquinas bulbosas `rounded-2xl`, con acolchados contenidos (`p-4 sm:p-5`) y metadatos en una sola línea fluida, erradicando cajas pesadas inertes.
+  - **Divisores Sutiles de Línea vs. Puntos:** En metadatos continuos, barras de herramientas y grupos de acciones, se prohíbe el uso de puntos tipográficos (`•`); se debe emplear micro-líneas verticales sutiles (`h-2.5` a `h-3 w-px bg-slate-300/80 dark:bg-slate-700/80`) para lograr un acabado arquitectónico y de alta precisión.
+  - Quedan prohibidos los bloques amorfos con proporciones casi cuadradas (~1:1), rellenos desmedidos (*padding fat*) o botones sobredimensionados que parezcan almohadas infladas.
 - **Tipografía Editorial:**
   - Títulos principales: `font-serif` (Playfair Display) con toques cursivos para acentos poéticos.
   - Textos de lectura y datos: `font-sans` (Plus Jakarta Sans / Manrope) limpios y legibles.
+  - Nombres Propios en Title Case Canónico: Todo nombre de persona (anfitrión, usuario o invitado) debe renderizarse obligatoriamente con la primera letra de cada palabra en mayúscula sostenida (`formatPersonName`), respetando tildes y caracteres en español (ej. `"Iker Méndez"`). Queda prohibido mostrar nombres en minúsculas directas o mayúsculas sostenidas en banners, menús o listas.
   - Etiquetas y códigos: `font-mono text-xs uppercase tracking-wider`.
 
 ---

@@ -71,4 +71,4 @@ Todo agente debe respetar las normas detalladas en los siguientes documentos de 
 ## 5. Habilidades Disponibles (`.agents/skills/`)
 
 - **`smart-fest-block-creator`** (`.agents/skills/smart-fest-block-creator/SKILL.md`): Guía paso a paso y plantilla para crear y registrar nuevos bloques Lego en la invitación.
-- **`smart-fest-floating-surface`** (`.agents/skills/smart-fest-floating-surface/SKILL.md`): Estándar obligatorio de arquitectura y diseño para popovers, menús contextuales y bottom sheets móviles utilizando React Portals y mitigación del Containing Block Trap.
+- **`smart-fest-floating-surface`** (`.agents/skills/smart-fest-floating-surface/SKILL.md`): Estándar obligatorio de arquitectura y diseño para popovers y superficies flotantes en Smart-Fest. Garantiza anclaje directo con pico conector (caret), borde institucional esmeralda continuo, esbeltez geométrica (anti-regordete), separación homogénea con scrim ligero y accesibilidad WAI-ARIA.
