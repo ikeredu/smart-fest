@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import type { Guest } from '@/types/guest';
+import { formatPersonName } from '@/lib/formatters';
 
 interface GuestRowProps {
   guest: Guest;
@@ -70,7 +71,8 @@ export default function GuestRow({
     title: 'Pendiente',
   };
 
-  const fullName = [guest.first_name, guest.last_name].filter(Boolean).join(' ') || 'Invitado sin nombre';
+  const rawFullName = [guest.first_name, guest.last_name].filter(Boolean).join(' ');
+  const fullName = formatPersonName(rawFullName, 'Invitado sin nombre');
 
   return (
     <>

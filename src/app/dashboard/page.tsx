@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import DashboardClient from '@/components/dashboard/DashboardClient';
+import { formatPersonName } from '@/lib/formatters';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -15,13 +16,14 @@ export default async function DashboardPage() {
     .eq('id', user?.id || '')
     .single();
 
-  // Resolve user display name with robust fallbacks
-  const userName =
+  // Resolve user display name with robust fallbacks and canonical Title Case
+  const rawUserName =
     profile?.full_name ||
     user?.user_metadata?.full_name ||
     user?.user_metadata?.name ||
     user?.email?.split('@')[0] ||
     'Anfitrión';
+  const userName = formatPersonName(rawUserName);
 
   const userEmail = profile?.email || user?.email || '';
   const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url || null;

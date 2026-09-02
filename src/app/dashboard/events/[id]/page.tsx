@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
+import { formatPersonName } from '@/lib/formatters';
 import EventManageClient, { EventTabType } from '@/components/dashboard/event/EventManageClient';
 import type { Metadata } from 'next';
 
@@ -52,12 +53,13 @@ export default async function EventHubPage({ params, searchParams }: EventPagePr
     .eq('id', user.id)
     .single();
 
-  const userName =
+  const rawUserName =
     profile?.full_name ||
     user.user_metadata?.full_name ||
     user.user_metadata?.name ||
     user.email?.split('@')[0] ||
     'Anfitrión';
+  const userName = formatPersonName(rawUserName);
 
   const userEmail = profile?.email || user.email || '';
   const avatarUrl = profile?.avatar_url || user.user_metadata?.avatar_url || null;
