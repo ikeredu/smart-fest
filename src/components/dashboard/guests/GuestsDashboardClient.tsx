@@ -248,6 +248,15 @@ export default function GuestsDashboardClient({
           {/* Banner Action Buttons */}
           <div className="flex flex-wrap items-center gap-2.5">
             <button
+              onClick={handleOpenCreateModal}
+              className="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
+              title="Registrar nuevo invitado"
+            >
+              <span className="font-bold text-sm leading-none">+</span>
+              <span>Nuevo Invitado</span>
+            </button>
+
+            <button
               onClick={handleCopyGeneralLink}
               className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer active:scale-95 shadow-sm"
               title="Copiar enlace general del evento"
@@ -269,7 +278,7 @@ export default function GuestsDashboardClient({
         <GuestStats metrics={metrics} />
 
         {/* Toolbar: Search + Filter Tabs */}
-        <section className="space-y-4 pt-2">
+        <section className="space-y-4 pt-2 pb-8">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {/* Search Input */}
             <div className="relative flex-1 max-w-md">
@@ -347,8 +356,8 @@ export default function GuestsDashboardClient({
 
           {/* Guests List Container */}
           {filteredGuests.length === 0 ? (
-            <div className="bg-[var(--bg-card)] rounded-2xl p-8 sm:p-12 border border-emerald-500/30 dark:border-emerald-500/40 text-center flex flex-col items-center justify-center space-y-4 shadow-sm transition-all duration-300">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl">
+            <div className="bg-[var(--bg-card)] rounded-2xl p-8 sm:p-12 border border-slate-200/90 dark:border-slate-800/90 text-center flex flex-col items-center justify-center space-y-4 shadow-sm transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center text-xl">
                 👥
               </div>
               <div className="max-w-md space-y-1">
@@ -366,7 +375,7 @@ export default function GuestsDashboardClient({
               {guests.length === 0 ? (
                 <button
                   onClick={handleOpenCreateModal}
-                  className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md active:scale-95 transition-all cursor-pointer"
+                  className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-sm active:scale-95 transition-all cursor-pointer"
                 >
                   + Agregar Primer Invitado
                 </button>
@@ -412,22 +421,6 @@ export default function GuestsDashboardClient({
       <footer className="py-6 text-center text-[11px] text-[var(--text-muted)] border-t border-slate-200 dark:border-slate-800">
         Smart-Fest &copy; {new Date().getFullYear()} — Plataforma SaaS de Gestión de Eventos
       </footer>
-
-      {/* Floating Action Button (FAB) en esquina inferior derecha */}
-      <button
-        type="button"
-        onClick={handleOpenCreateModal}
-        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 bg-emerald-600 hover:bg-emerald-500 active:scale-90 text-white rounded-full p-4 sm:px-5 sm:py-3.5 shadow-2xl shadow-emerald-950/40 border border-emerald-400/30 flex items-center justify-center space-x-2 transition-all duration-200 cursor-pointer group hover:shadow-emerald-500/30"
-        title="Agregar nuevo invitado"
-        aria-label="Agregar nuevo invitado"
-      >
-        <span className="text-2xl sm:text-xl leading-none font-bold transform group-hover:rotate-90 transition-transform duration-300">
-          +
-        </span>
-        <span className="hidden sm:inline font-bold text-xs tracking-wide">
-          Nuevo Invitado
-        </span>
-      </button>
 
       {/* Guest Modal (Alta / Edición) */}
       <GuestModal
