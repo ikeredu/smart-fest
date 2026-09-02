@@ -390,7 +390,7 @@ export default function GuestsDashboardClient({
                 </span>
               </div>
 
-              <div className="space-y-3">
+              <div className="bg-[var(--bg-card)] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 divide-y divide-slate-100 dark:divide-slate-800/60 shadow-xs overflow-hidden">
                 {filteredGuests.map((guest) => (
                   <GuestRow
                     key={guest.id}

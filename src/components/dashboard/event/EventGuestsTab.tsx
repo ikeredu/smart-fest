@@ -184,14 +184,14 @@ export default function EventGuestsTab({
           )}
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1">
             <span>
               Mostrando {filteredGuests.length} de {guests.length} {guests.length === 1 ? 'invitado' : 'invitados'}
             </span>
           </div>
 
-          <div className="space-y-3">
+          <div className="bg-[var(--bg-card)] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 divide-y divide-slate-100 dark:divide-slate-800/60 shadow-xs overflow-hidden">
             {filteredGuests.map((guest) => (
               <GuestRow
                 key={guest.id}
