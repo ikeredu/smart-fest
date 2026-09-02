@@ -356,8 +356,8 @@ export default function GuestsDashboardClient({
 
           {/* Guests List Container */}
           {filteredGuests.length === 0 ? (
-            <div className="bg-[var(--bg-card)] rounded-2xl p-8 sm:p-12 border border-slate-200/90 dark:border-slate-800/90 text-center flex flex-col items-center justify-center space-y-4 shadow-sm transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center text-xl">
+            <div className="py-12 sm:py-16 text-center flex flex-col items-center justify-center space-y-4">
+              <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center text-xl">
                 👥
               </div>
               <div className="max-w-md space-y-1">
@@ -375,7 +375,7 @@ export default function GuestsDashboardClient({
               {guests.length === 0 ? (
                 <button
                   onClick={handleOpenCreateModal}
-                  className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-sm active:scale-95 transition-all cursor-pointer"
+                  className="mt-2 py-2 px-4.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-sm active:scale-95 transition-all cursor-pointer"
                 >
                   + Agregar Primer Invitado
                 </button>
@@ -392,14 +392,14 @@ export default function GuestsDashboardClient({
               )}
             </div>
           ) : (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1 pb-1">
                 <span>
                   Mostrando {filteredGuests.length} de {guests.length} {guests.length === 1 ? 'invitado' : 'invitados'}
                 </span>
               </div>
 
-              <div className="bg-[var(--bg-card)] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 divide-y divide-slate-100 dark:divide-slate-800/60 shadow-xs overflow-hidden">
+              <div className="divide-y divide-slate-200/70 dark:divide-slate-800/80 border-y border-slate-200/70 dark:border-slate-800/80">
                 {filteredGuests.map((guest) => (
                   <GuestRow
                     key={guest.id}
