@@ -99,7 +99,23 @@ Todo popover debe implementar:
 
 ---
 
-## 6. Plantilla Canónica de Código (Copy-Paste Ready)
+## 6. Iconografía Oficial con `lucide-react`
+
+> [!IMPORTANT]
+> **Queda terminantemente prohibido el uso de SVGs inline crudos, entidades HTML o caracteres sueltos para controles en superficies flotantes.** Toda iconografía de triggers, selectores y acciones debe provenir exclusivamente de **`lucide-react`**.
+
+### Reglas de Aplicación:
+1. **Dimensiones Compactas (*Slim Scale*):**
+   - Iconos en triggers y cabeceras: `w-3.5 h-3.5` (ej. `<ChevronDown className="w-3.5 h-3.5" />`).
+   - Iconos en filas de menú y selectores segmentados: `w-3 h-3` a `w-3.5 h-3.5` (ej. `<Sun className="w-3 h-3" />`, `<Moon className="w-3 h-3" />`, `<LayoutGrid className="w-3.5 h-3.5" />`, `<LogOut className="w-3.5 h-3.5" />`).
+2. **Herencia de Color (`currentColor`):**
+   - Los iconos heredan dinámicamente la paleta del texto o estado usando clases de Tailwind (`text-[var(--text-muted)]`, `text-emerald-600 dark:text-emerald-400`, `text-rose-600`).
+3. **Animación en Triggers:**
+   - En chevrons de apertura/cierre, aplicar rotación suave: `className={cn("w-3.5 h-3.5 transition-transform duration-200", isOpen && "rotate-180")}`.
+
+---
+
+## 7. Plantilla Canónica de Código (Copy-Paste Ready)
 
 ```tsx
 'use client';

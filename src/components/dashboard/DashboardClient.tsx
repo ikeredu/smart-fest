@@ -5,6 +5,7 @@ import EventCard from './EventCard';
 import CreateEventModal from './CreateEventModal';
 import DashboardHeader from './DashboardHeader';
 import { formatPersonName } from '@/lib/formatters';
+import { Plus, Sparkles } from 'lucide-react';
 
 interface EventItem {
   id: string;
@@ -88,7 +89,7 @@ export default function DashboardClient({
               onClick={handleOpenCreate}
               className="py-2 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md hover:shadow-emerald-600/20 active:scale-95 flex items-center space-x-1.5 transition-all cursor-pointer"
             >
-              <span className="text-sm leading-none">+</span>
+              <Plus className="w-3.5 h-3.5" />
               <span>Nuevo Evento</span>
             </button>
           </div>
@@ -96,8 +97,8 @@ export default function DashboardClient({
           {events.length === 0 ? (
             /* EMPTY STATE (Con borde verde delicado) */
             <div className="bg-[var(--bg-card)] rounded-2xl p-8 sm:p-12 border border-emerald-500/30 dark:border-emerald-500/40 text-center flex flex-col items-center justify-center space-y-4 shadow-sm transition-all duration-300">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl">
-                ✨
+              <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <Sparkles className="w-6 h-6" />
               </div>
               <div className="max-w-md space-y-1">
                 <h3 className="text-lg font-bold text-[var(--text-main)]">
@@ -109,9 +110,10 @@ export default function DashboardClient({
               </div>
               <button
                 onClick={handleOpenCreate}
-                className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md active:scale-95 transition-all cursor-pointer"
+                className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md active:scale-95 flex items-center space-x-1.5 transition-all cursor-pointer"
               >
-                + Crear Mi Primer Evento
+                <Plus className="w-3.5 h-3.5" />
+                <span>Crear Mi Primer Evento</span>
               </button>
             </div>
           ) : (
