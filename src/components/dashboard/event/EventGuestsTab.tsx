@@ -58,28 +58,17 @@ export default function EventGuestsTab({
 
   return (
     <div className="space-y-5 animate-fade-in-up">
-      {/* Barra de Herramientas y Botón de Nuevo Invitado */}
-      <section className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-2">
-        <div>
-          <h2 className="text-lg font-bold text-[var(--text-main)] flex items-center space-x-2">
-            <span>Listado de Invitados</span>
-            <span className="text-xs font-normal text-[var(--text-muted)] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
-              {guests.length} {guests.length === 1 ? 'invitado' : 'invitados'}
-            </span>
+      {/* Cabecera Compacta */}
+      <div className="flex items-center justify-between gap-2 pt-1 pb-1">
+        <div className="flex items-center space-x-2">
+          <h2 className="text-base sm:text-lg font-bold text-[var(--text-main)]">
+            Invitados
           </h2>
-          <p className="text-xs text-[var(--text-muted)] mt-0.5">
-            Administra pases individuales, códigos de acceso y comparte invitaciones por WhatsApp.
-          </p>
+          <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+            {guests.length} {guests.length === 1 ? 'registrado' : 'registrados'}
+          </span>
         </div>
-
-        <button
-          onClick={onOpenCreateModal}
-          className="py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md hover:shadow-emerald-600/20 active:scale-95 flex items-center justify-center space-x-2 transition-all cursor-pointer shrink-0"
-        >
-          <span className="text-base leading-none">+</span>
-          <span>Nuevo Invitado</span>
-        </button>
-      </section>
+      </div>
 
       {/* Buscador y Pestañas de Estado */}
       <section className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
@@ -217,6 +206,22 @@ export default function EventGuestsTab({
           </div>
         </div>
       )}
+
+      {/* Floating Action Button (FAB) en esquina inferior derecha */}
+      <button
+        type="button"
+        onClick={onOpenCreateModal}
+        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 bg-emerald-600 hover:bg-emerald-500 active:scale-90 text-white rounded-full p-4 sm:px-5 sm:py-3.5 shadow-2xl shadow-emerald-950/40 border border-emerald-400/30 flex items-center justify-center space-x-2 transition-all duration-200 cursor-pointer group hover:shadow-emerald-500/30"
+        title="Agregar nuevo invitado"
+        aria-label="Agregar nuevo invitado"
+      >
+        <span className="text-2xl sm:text-xl leading-none font-bold transform group-hover:rotate-90 transition-transform duration-300">
+          +
+        </span>
+        <span className="hidden sm:inline font-bold text-xs tracking-wide">
+          Nuevo Invitado
+        </span>
+      </button>
     </div>
   );
 }

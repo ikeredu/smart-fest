@@ -262,14 +262,6 @@ export default function GuestsDashboardClient({
             >
               <span>👁️ Ver Invitación</span>
             </Link>
-
-            <button
-              onClick={handleOpenCreateModal}
-              className="py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md hover:shadow-emerald-600/20 active:scale-95 flex items-center space-x-2 transition-all cursor-pointer"
-            >
-              <span className="text-base leading-none">+</span>
-              <span>Nuevo Invitado</span>
-            </button>
           </div>
         </section>
 
@@ -420,6 +412,22 @@ export default function GuestsDashboardClient({
       <footer className="py-6 text-center text-[11px] text-[var(--text-muted)] border-t border-slate-200 dark:border-slate-800">
         Smart-Fest &copy; {new Date().getFullYear()} — Plataforma SaaS de Gestión de Eventos
       </footer>
+
+      {/* Floating Action Button (FAB) en esquina inferior derecha */}
+      <button
+        type="button"
+        onClick={handleOpenCreateModal}
+        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 bg-emerald-600 hover:bg-emerald-500 active:scale-90 text-white rounded-full p-4 sm:px-5 sm:py-3.5 shadow-2xl shadow-emerald-950/40 border border-emerald-400/30 flex items-center justify-center space-x-2 transition-all duration-200 cursor-pointer group hover:shadow-emerald-500/30"
+        title="Agregar nuevo invitado"
+        aria-label="Agregar nuevo invitado"
+      >
+        <span className="text-2xl sm:text-xl leading-none font-bold transform group-hover:rotate-90 transition-transform duration-300">
+          +
+        </span>
+        <span className="hidden sm:inline font-bold text-xs tracking-wide">
+          Nuevo Invitado
+        </span>
+      </button>
 
       {/* Guest Modal (Alta / Edición) */}
       <GuestModal
