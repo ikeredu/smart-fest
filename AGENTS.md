@@ -1,4 +1,4 @@
-﻿# Smart-Fest — Directrices Maestras para Agentes de IA
+# Smart-Fest — Directrices Maestras para Agentes de IA
 
 Bienvenido a la base de código de **Smart-Fest**, una plataforma SaaS de alto rendimiento para la creación, personalización y gestión de invitaciones digitales interactivas con confirmación de asistencia (RSVP) en tiempo real.
 
@@ -71,3 +71,4 @@ Todo agente debe respetar las normas detalladas en los siguientes documentos de 
 ## 5. Habilidades Disponibles (`.agents/skills/`)
 
 - **`smart-fest-block-creator`** (`.agents/skills/smart-fest-block-creator/SKILL.md`): Guía paso a paso y plantilla para crear y registrar nuevos bloques Lego en la invitación.
+- **`smart-fest-floating-surface`** (`.agents/skills/smart-fest-floating-surface/SKILL.md`): Estándar obligatorio de arquitectura y diseño para popovers, menús contextuales y bottom sheets móviles utilizando React Portals y mitigación del Containing Block Trap.

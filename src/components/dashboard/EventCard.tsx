@@ -3,18 +3,21 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-interface EventCardProps {
-  event: {
-    id: string;
-    title: string;
-    slug: string;
-    event_date: string | null;
-    created_at: string;
-    config?: unknown;
-  };
+export interface EventItem {
+  id: string;
+  title: string;
+  slug: string;
+  event_date: string | null;
+  created_at: string;
+  config?: unknown;
 }
 
-export default function EventCard({ event }: EventCardProps) {
+interface EventCardProps {
+  event: EventItem;
+  onEdit?: (event: EventItem) => void;
+}
+
+export default function EventCard({ event, onEdit }: EventCardProps) {
   const [copied, setCopied] = useState(false);
 
   const formattedDate = event.event_date
@@ -67,14 +70,32 @@ export default function EventCard({ event }: EventCardProps) {
 
       {/* Inferior: Copiar link rápido y llamada a la acción */}
       <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
-        <button
-          type="button"
-          onClick={handleCopyLink}
-          className="py-1 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-[11px] font-medium transition-all flex items-center space-x-1 cursor-pointer"
-          title="Copiar enlace público de la invitación"
-        >
-          <span>{copied ? '✓ Copiado' : '🔗 Copiar link'}</span>
-        </button>
+        <div className="flex items-center space-x-2">
+          <button
+            type="button"
+            onClick={handleCopyLink}
+            className="py-1 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-[11px] font-medium transition-all flex items-center space-x-1 cursor-pointer"
+            title="Copiar enlace público de la invitación"
+          >
+            <span>{copied ? '✓ Copiado' : '🔗 Copiar link'}</span>
+          </button>
+
+          {onEdit && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onEdit(event);
+              }}
+              className="py-1 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-[11px] font-medium transition-all flex items-center space-x-1 cursor-pointer"
+              title="Editar título o fecha del evento"
+            >
+              <span>✏️</span>
+              <span className="hidden sm:inline">Editar</span>
+            </button>
+          )}
+        </div>
 
         <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-xs flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
           <span>Gestionar</span>
