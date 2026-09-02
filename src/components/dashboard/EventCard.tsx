@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { Calendar, Link2, Check, Pencil, ArrowRight } from 'lucide-react';
 
 export interface EventItem {
   id: string;
@@ -57,9 +58,7 @@ export default function EventCard({ event, onEdit }: EventCardProps) {
         {/* Metadatos en una sola línea fluida y elegante */}
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[var(--text-muted)]">
           <div className="flex items-center space-x-1.5">
-            <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+            <Calendar className="w-3.5 h-3.5 opacity-70" />
             <span>{formattedDate}</span>
           </div>
           <span className="h-2.5 w-px bg-slate-300 dark:bg-slate-700/80 mx-1 inline-block shrink-0" />
@@ -75,10 +74,20 @@ export default function EventCard({ event, onEdit }: EventCardProps) {
         <button
           type="button"
           onClick={handleCopyLink}
-          className="h-7 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-[11px] font-medium transition-all flex items-center space-x-1 cursor-pointer"
+          className="h-7 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-[11px] font-medium transition-all flex items-center space-x-1.5 cursor-pointer"
           title="Copiar enlace público de la invitación"
         >
-          <span>{copied ? '✓ Copiado' : '🔗 Copiar link'}</span>
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>Copiado</span>
+            </>
+          ) : (
+            <>
+              <Link2 className="w-3.5 h-3.5 opacity-70" />
+              <span>Copiar link</span>
+            </>
+          )}
         </button>
 
         {/* Derecha: Grupo operativo de gestión del evento */}
@@ -94,9 +103,7 @@ export default function EventCard({ event, onEdit }: EventCardProps) {
               className="h-7 px-2 rounded-lg text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 text-[11px] font-semibold transition-all flex items-center space-x-1.5 cursor-pointer"
               title="Editar título o fecha del evento"
             >
-              <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-              </svg>
+              <Pencil className="w-3.5 h-3.5 opacity-80" />
               <span>Editar</span>
             </button>
           )}
@@ -107,7 +114,7 @@ export default function EventCard({ event, onEdit }: EventCardProps) {
 
           <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-xs flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
             <span>Gestionar</span>
-            <span>&rarr;</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </span>
         </div>
       </div>

@@ -4,12 +4,14 @@ Bienvenido a la base de código de **Smart-Fest**, una plataforma SaaS de alto r
 
 ---
 
-## 1. Regla Mandatoria de Herramientas (Suite NPX)
+## 1. Regla Mandatoria de Herramientas (Suite NPX y Gestor PNPM)
 
 > [!IMPORTANT]
-> **Queda terminantemente prohibido el uso de comandos `npm run ...` si existe el ejecutable directo en la suite `npx`.** Todo agente de IA debe ejecutar las herramientas utilizando **`npx`** para garantizar determinismo y paridad de entorno.
+> - **Gestor de Paquetes Exclusivo (`pnpm`):** Queda **terminantemente prohibido** el uso de `npm` (`npm install`, `npm i`, `npm add`, etc.). Toda descarga, adición, instalación o desinstalación de dependencias debe realizarse **exclusivamente con `pnpm`** (`pnpm add ...`, `pnpm add -D ...`, `pnpm remove ...`).
+> - **Suite NPX:** Queda **terminantemente prohibido** el uso de comandos `npm run ...` si existe el ejecutable directo en la suite `npx`. Todo agente de IA debe ejecutar las herramientas utilizando **`npx`** para garantizar determinismo y paridad de entorno.
 
 ### Comandos Oficiales de la Suite:
+- **Gestión de Dependencias:** `pnpm add <paquete>`, `pnpm add -D <paquete>`, `pnpm remove <paquete>`
 - **Linter:** `npx eslint`
 - **Verificación de Tipos:** `npx tsc --noEmit`
 - **Compilación / Build:** `npx next build`
@@ -51,6 +53,7 @@ Smart-Fest se compone de dos áreas arquitectónicas fundamentales:
 - **Gestión de Eventos y Lista Plana de Invitados:** Directorios de datos limpios y planos (`divide-y`), sin tarjetas anidadas ni bordes redondeados pesados que ahoguen el contenido.
 - **Tokens Inteligentes:** Los códigos de acceso (`#ABC123`) absorben el color del estado RSVP (verde = confirmado, ámbar = pendiente, rojo = no asistirá).
 - **Acciones Táctiles y Mobile Action Sheets:** En pantallas móviles (`< sm`), los menús contextuales (`⋯`) se abren como un Bottom Sheet deslizante con opciones de 44px+ de altura.
+- **Iconografía Oficial (`lucide-react`):** Todo el panel SaaS utiliza exclusivamente `lucide-react`, erradicando SVGs inline huérfanos, emojis para acciones o entidades tipográficas.
 - **Estandarización de Modales:** Todos los diálogos comparten el mismo backdrop (`bg-black/60 backdrop-blur-xs`), bloqueo de scroll y cierre con tecla `Escape`.
 
 ---

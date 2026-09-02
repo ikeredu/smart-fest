@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { logoutAction } from '@/app/(auth)/actions';
 import { formatPersonName } from '@/lib/formatters';
+import { ChevronDown, Sun, Moon, Monitor, LayoutGrid, LogOut } from 'lucide-react';
 
 interface UserProfileMenuProps {
   userName: string;
@@ -94,16 +95,11 @@ export default function UserProfileMenu({
           </span>
         </div>
 
-        <svg
+        <ChevronDown
           className={`w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--text-main)] transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-        </svg>
+        />
       </button>
 
       {/* ============================================================ */}
@@ -176,9 +172,7 @@ export default function UserProfileMenu({
                       : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
                   }`}
                 >
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
+                  <Sun className="w-3 h-3" />
                   <span>Claro</span>
                 </button>
                 <button
@@ -191,9 +185,7 @@ export default function UserProfileMenu({
                       : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
                   }`}
                 >
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
+                  <Moon className="w-3 h-3" />
                   <span>Oscuro</span>
                 </button>
                 <button
@@ -206,9 +198,7 @@ export default function UserProfileMenu({
                       : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
                   }`}
                 >
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+                  <Monitor className="w-3 h-3" />
                   <span>Auto</span>
                 </button>
               </div>
@@ -226,9 +216,7 @@ export default function UserProfileMenu({
               onClick={() => setIsOpen(false)}
               className="flex items-center space-x-2 px-2.5 py-1.5 rounded-xl text-xs font-medium text-[var(--text-main)] hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
             >
-              <svg className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-              </svg>
+              <LayoutGrid className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
               <span>Mis Eventos</span>
             </Link>
           </div>
@@ -242,9 +230,7 @@ export default function UserProfileMenu({
               className="w-full flex items-center justify-between px-2.5 py-1.5 text-xs font-semibold rounded-xl text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
             >
               <span>Cerrar Sesión</span>
-              <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
+              <LogOut className="w-3.5 h-3.5 opacity-80" />
             </button>
           </form>
         </div>

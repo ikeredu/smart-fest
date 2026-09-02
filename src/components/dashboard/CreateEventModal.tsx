@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useTransition } from 'react';
 import { createEventAction, updateEventBasicsAction } from '@/app/dashboard/eventsActions';
+import { Pencil, Sparkles, X, Check } from 'lucide-react';
 
 export interface EventToEdit {
   id: string;
@@ -90,8 +91,8 @@ export default function CreateEventModal({
         {/* 1. Header Estructural */}
         <div className="px-6 pt-5 pb-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-base shrink-0">
-              {isEditing ? '✏️' : '✨'}
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              {isEditing ? <Pencil className="w-4 h-4" /> : <Sparkles className="w-4 h-4" />}
             </div>
             <h2 className="text-lg font-bold text-[var(--text-main)] leading-tight">
               {isEditing ? 'Editar Evento' : 'Crear Nuevo Evento'}
@@ -103,7 +104,7 @@ export default function CreateEventModal({
             className="w-8 h-8 rounded-xl flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             aria-label="Cerrar modal"
           >
-            ✕
+            <X className="w-4 h-4" />
           </button>
         </div>
 
@@ -171,15 +172,19 @@ export default function CreateEventModal({
               disabled={isPending}
               className="py-2 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-sm hover:shadow-emerald-600/20 active:scale-95 transition-all disabled:opacity-50 flex items-center space-x-1.5 cursor-pointer"
             >
-              <span>
-                {isPending
-                  ? isEditing
-                    ? 'Guardando...'
-                    : 'Creando...'
-                  : isEditing
-                    ? 'Guardar Cambios ✓'
-                    : 'Crear Evento ✨'}
-              </span>
+              {isPending ? (
+                <span>{isEditing ? 'Guardando...' : 'Creando...'}</span>
+              ) : isEditing ? (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Guardar Cambios</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Crear Evento</span>
+                </>
+              )}
             </button>
           </div>
         </form>

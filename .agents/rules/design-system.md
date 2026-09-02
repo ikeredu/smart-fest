@@ -38,7 +38,21 @@ Los componentes deben preferir variables CSS semánticas definidas en `src/app/g
 
 ---
 
-## 3. Listas y Directorios de Datos (Flat List Standard)
+## 3. Iconografía del Dashboard SaaS (Estándar `lucide-react`)
+
+> [!IMPORTANT]
+> **En todo el Panel de Control SaaS, la iconografía debe implementarse obligatoriamente con `lucide-react`.** Queda prohibido copiar SVGs inline crudos, usar entidades HTML (`&rarr;`) o incrustar emojis para botones y acciones operativas.
+
+### Especificaciones de Escala y Estilo:
+- **Microacciones y Metadatos:** `w-3.5 h-3.5` (ej. fechas en `<Calendar />`, acciones en `<Pencil />`, `<Link2 />`, `<Check />`).
+- **Botones y Modales:** `w-3.5 h-3.5` o `w-4 h-4` (ej. `<Plus />` en creación de eventos, `<X />` en cierre de modal).
+- **Popovers y Menús Desplegables:** `w-3 h-3` a `w-3.5 h-3.5` (ej. `<Sun />`, `<Moon />`, `<Monitor />`, `<LayoutGrid />`, `<LogOut />`).
+- **Estados Vacíos (Empty States):** `w-6 h-6` (ej. `<Sparkles />` dentro de contenedores circulares).
+- **Color y Transiciones:** Los iconos heredan automáticamente la paleta semántica mediante `currentColor` y soportan animaciones sutiles (ej. `<ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />`).
+
+---
+
+## 4. Listas y Directorios de Datos (Flat List Standard)
 
 - **Sin tarjetas envolventes pesadas:** Las listas de registros (invitados, eventos) habitan sobre el fondo plano, separadas por divisores horizontales sutiles (`divide-y divide-slate-200/70 dark:divide-slate-800/80`).
 - **Sin avatares innecesarios:** En directorios operacionales de eventos, evitar avatares que consuman espacio horizontal en móviles.
