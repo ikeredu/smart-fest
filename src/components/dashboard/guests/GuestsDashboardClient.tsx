@@ -3,9 +3,8 @@
 import React, { useState, useTransition, useMemo } from 'react';
 import Link from 'next/link';
 import type { Guest, GuestStatus, GuestStatsMetrics } from '@/types/guest';
-import { logoutAction } from '@/app/(auth)/actions';
 import { deleteGuestAction } from '@/app/dashboard/events/[id]/guests/guestsActions';
-import ThemeToggle from '@/components/dashboard/ThemeToggle';
+import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import GuestStats from './GuestStats';
 import GuestRow from './GuestRow';
 import GuestModal from './GuestModal';
@@ -153,58 +152,13 @@ export default function GuestsDashboardClient({
       )}
 
       {/* Header Bar */}
-      <header className="sticky top-0 z-30 w-full px-4 sm:px-8 py-3.5 bg-[var(--bg-card)]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors duration-300">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          {/* Brand & Role Badge */}
-          <div className="flex items-center space-x-3">
-            <Link href="/dashboard" className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--text-main)] hover:opacity-80 transition-opacity">
-              Smart-Fest
-            </Link>
-            <span className="text-[10px] uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">
-              {userRole}
-            </span>
-          </div>
-
-          {/* Controls: Theme Toggle + User Info + Logout */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <ThemeToggle />
-
-            <div className="flex items-center space-x-2.5 pl-2 border-l border-slate-200 dark:border-slate-800">
-              {avatarUrl ? (
-                <img
-                  src={avatarUrl}
-                  alt={userName}
-                  className="w-8 h-8 rounded-full border border-emerald-500/30 object-cover"
-                />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                  {userName.charAt(0).toUpperCase()}
-                </div>
-              )}
-              <div className="hidden sm:flex flex-col text-left">
-                <span className="text-xs font-semibold text-[var(--text-main)] leading-tight">
-                  {userName}
-                </span>
-                <span className="text-[10px] text-[var(--text-muted)] truncate max-w-[150px]">
-                  {userEmail}
-                </span>
-              </div>
-            </div>
-
-            <form action={logoutAction}>
-              <button
-                type="submit"
-                className="py-1.5 px-3 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-rose-50 dark:bg-slate-800 dark:hover:bg-rose-950/40 border border-slate-300 dark:border-slate-700 text-slate-700 hover:text-rose-600 dark:text-slate-300 dark:hover:text-rose-400 text-xs font-semibold transition-all duration-200 active:scale-95 flex items-center space-x-1.5 cursor-pointer shadow-sm"
-              >
-                <span>Salir</span>
-                <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
-      </header>
+      <DashboardHeader
+        userName={userName}
+        userEmail={userEmail}
+        userRole={userRole}
+        avatarUrl={avatarUrl}
+        breadcrumb={{ label: event.title, href: `/dashboard/events/${event.id}` }}
+      />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-8 md:p-10 flex flex-col space-y-6">
@@ -248,6 +202,15 @@ export default function GuestsDashboardClient({
           {/* Banner Action Buttons */}
           <div className="flex flex-wrap items-center gap-2.5">
             <button
+              onClick={handleOpenCreateModal}
+              className="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
+              title="Registrar nuevo invitado"
+            >
+              <span className="font-bold text-sm leading-none">+</span>
+              <span>Nuevo Invitado</span>
+            </button>
+
+            <button
               onClick={handleCopyGeneralLink}
               className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer active:scale-95 shadow-sm"
               title="Copiar enlace general del evento"
@@ -269,7 +232,7 @@ export default function GuestsDashboardClient({
         <GuestStats metrics={metrics} />
 
         {/* Toolbar: Search + Filter Tabs */}
-        <section className="space-y-4 pt-2">
+        <section className="space-y-4 pt-2 pb-8">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {/* Search Input */}
             <div className="relative flex-1 max-w-md">
@@ -347,8 +310,8 @@ export default function GuestsDashboardClient({
 
           {/* Guests List Container */}
           {filteredGuests.length === 0 ? (
-            <div className="bg-[var(--bg-card)] rounded-2xl p-8 sm:p-12 border border-emerald-500/30 dark:border-emerald-500/40 text-center flex flex-col items-center justify-center space-y-4 shadow-sm transition-all duration-300">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl">
+            <div className="py-12 sm:py-16 text-center flex flex-col items-center justify-center space-y-4">
+              <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center text-xl">
                 👥
               </div>
               <div className="max-w-md space-y-1">
@@ -366,7 +329,7 @@ export default function GuestsDashboardClient({
               {guests.length === 0 ? (
                 <button
                   onClick={handleOpenCreateModal}
-                  className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md active:scale-95 transition-all cursor-pointer"
+                  className="mt-2 py-2 px-4.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-sm active:scale-95 transition-all cursor-pointer"
                 >
                   + Agregar Primer Invitado
                 </button>
@@ -383,14 +346,14 @@ export default function GuestsDashboardClient({
               )}
             </div>
           ) : (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1 pb-1">
                 <span>
                   Mostrando {filteredGuests.length} de {guests.length} {guests.length === 1 ? 'invitado' : 'invitados'}
                 </span>
               </div>
 
-              <div className="bg-[var(--bg-card)] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 divide-y divide-slate-100 dark:divide-slate-800/60 shadow-xs overflow-hidden">
+              <div className="divide-y divide-slate-200/70 dark:divide-slate-800/80 border-y border-slate-200/70 dark:border-slate-800/80">
                 {filteredGuests.map((guest) => (
                   <GuestRow
                     key={guest.id}
@@ -412,22 +375,6 @@ export default function GuestsDashboardClient({
       <footer className="py-6 text-center text-[11px] text-[var(--text-muted)] border-t border-slate-200 dark:border-slate-800">
         Smart-Fest &copy; {new Date().getFullYear()} — Plataforma SaaS de Gestión de Eventos
       </footer>
-
-      {/* Floating Action Button (FAB) en esquina inferior derecha */}
-      <button
-        type="button"
-        onClick={handleOpenCreateModal}
-        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 bg-emerald-600 hover:bg-emerald-500 active:scale-90 text-white rounded-full p-4 sm:px-5 sm:py-3.5 shadow-2xl shadow-emerald-950/40 border border-emerald-400/30 flex items-center justify-center space-x-2 transition-all duration-200 cursor-pointer group hover:shadow-emerald-500/30"
-        title="Agregar nuevo invitado"
-        aria-label="Agregar nuevo invitado"
-      >
-        <span className="text-2xl sm:text-xl leading-none font-bold transform group-hover:rotate-90 transition-transform duration-300">
-          +
-        </span>
-        <span className="hidden sm:inline font-bold text-xs tracking-wide">
-          Nuevo Invitado
-        </span>
-      </button>
 
       {/* Guest Modal (Alta / Edición) */}
       <GuestModal

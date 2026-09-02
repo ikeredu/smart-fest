@@ -57,10 +57,10 @@ export default function EventGuestsTab({
   const declinedCount = guests.filter((g) => g.status === 'declined').length;
 
   return (
-    <div className="space-y-5 animate-fade-in-up">
-      {/* Cabecera Compacta */}
-      <div className="flex items-center justify-between gap-2 pt-1 pb-1">
-        <div className="flex items-center space-x-2">
+    <div className="space-y-4 animate-fade-in-up pb-8">
+      {/* Cabecera con Título y Acción Primaria Integrada */}
+      <div className="flex items-center justify-between gap-3 pt-1 pb-1">
+        <div className="flex items-center space-x-2.5">
           <h2 className="text-base sm:text-lg font-bold text-[var(--text-main)]">
             Invitados
           </h2>
@@ -68,6 +68,16 @@ export default function EventGuestsTab({
             {guests.length} {guests.length === 1 ? 'registrado' : 'registrados'}
           </span>
         </div>
+
+        {/* Botón Primario: + Nuevo Invitado (Integrado en Toolbar, sin FAB) */}
+        <button
+          type="button"
+          onClick={onOpenCreateModal}
+          className="py-2 px-3.5 sm:px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-semibold text-xs tracking-wide shadow-sm hover:shadow-emerald-600/20 transition-all cursor-pointer flex items-center space-x-1.5 shrink-0"
+        >
+          <span className="text-sm font-bold leading-none">+</span>
+          <span>Nuevo Invitado</span>
+        </button>
       </div>
 
       {/* Buscador y Pestañas de Estado */}
@@ -146,10 +156,10 @@ export default function EventGuestsTab({
         </div>
       </section>
 
-      {/* Lista de Invitados */}
+      {/* Lista de Invitados (Lista Plana Continua) */}
       {filteredGuests.length === 0 ? (
-        <div className="bg-[var(--bg-card)] rounded-2xl p-8 sm:p-12 border border-emerald-500/30 dark:border-emerald-500/40 text-center flex flex-col items-center justify-center space-y-4 shadow-sm transition-all duration-300">
-          <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl">
+        <div className="py-12 sm:py-16 text-center flex flex-col items-center justify-center space-y-4">
+          <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center text-xl">
             👥
           </div>
           <div className="max-w-md space-y-1">
@@ -160,16 +170,17 @@ export default function EventGuestsTab({
             </h3>
             <p className="text-xs text-[var(--text-muted)] leading-relaxed">
               {guests.length === 0
-                ? 'Comienza a registrar las personas o familias para asignarles pases y generar sus enlaces personalizados de confirmación.'
+                ? 'Comienza a registrar personas o familias para asignarles pases y generar sus enlaces personalizados de confirmación.'
                 : 'Intenta limpiar el término de búsqueda o seleccionar otro estado de confirmación.'}
             </p>
           </div>
           {guests.length === 0 ? (
             <button
               onClick={onOpenCreateModal}
-              className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md active:scale-95 transition-all cursor-pointer"
+              className="mt-2 py-2 px-4.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-sm hover:shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer flex items-center space-x-1.5"
             >
-              + Agregar Primer Invitado
+              <span>+</span>
+              <span>Agregar Primer Invitado</span>
             </button>
           ) : (
             <button
@@ -184,14 +195,14 @@ export default function EventGuestsTab({
           )}
         </div>
       ) : (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1">
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-xs text-[var(--text-muted)] px-1 pb-1">
             <span>
               Mostrando {filteredGuests.length} de {guests.length} {guests.length === 1 ? 'invitado' : 'invitados'}
             </span>
           </div>
 
-          <div className="bg-[var(--bg-card)] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 divide-y divide-slate-100 dark:divide-slate-800/60 shadow-xs overflow-hidden">
+          <div className="divide-y divide-slate-200/70 dark:divide-slate-800/80 border-y border-slate-200/70 dark:border-slate-800/80">
             {filteredGuests.map((guest) => (
               <GuestRow
                 key={guest.id}
@@ -206,22 +217,6 @@ export default function EventGuestsTab({
           </div>
         </div>
       )}
-
-      {/* Floating Action Button (FAB) en esquina inferior derecha */}
-      <button
-        type="button"
-        onClick={onOpenCreateModal}
-        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 bg-emerald-600 hover:bg-emerald-500 active:scale-90 text-white rounded-full p-4 sm:px-5 sm:py-3.5 shadow-2xl shadow-emerald-950/40 border border-emerald-400/30 flex items-center justify-center space-x-2 transition-all duration-200 cursor-pointer group hover:shadow-emerald-500/30"
-        title="Agregar nuevo invitado"
-        aria-label="Agregar nuevo invitado"
-      >
-        <span className="text-2xl sm:text-xl leading-none font-bold transform group-hover:rotate-90 transition-transform duration-300">
-          +
-        </span>
-        <span className="hidden sm:inline font-bold text-xs tracking-wide">
-          Nuevo Invitado
-        </span>
-      </button>
     </div>
   );
 }

@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { logoutAction } from '@/app/(auth)/actions';
 import EventCard from './EventCard';
 import CreateEventModal from './CreateEventModal';
-import ThemeToggle from './ThemeToggle';
+import DashboardHeader from './DashboardHeader';
 
 interface EventItem {
   id: string;
@@ -31,65 +30,32 @@ export default function DashboardClient({
   events,
 }: DashboardClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [eventToEdit, setEventToEdit] = useState<EventItem | null>(null);
+
+  const handleOpenCreate = () => {
+    setEventToEdit(null);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEdit = (event: EventItem) => {
+    setEventToEdit(event);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEventToEdit(null);
+  };
 
   return (
     <div className="min-h-screen bg-[var(--bg-app)] text-[var(--text-main)] flex flex-col font-sans transition-colors duration-300 select-none">
       {/* Header Bar */}
-      <header className="sticky top-0 z-30 w-full px-4 sm:px-8 py-3.5 bg-[var(--bg-card)]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 shadow-sm transition-colors duration-300">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          {/* Brand & Role Badge */}
-          <div className="flex items-center space-x-3">
-            <span className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--text-main)]">
-              Smart-Fest
-            </span>
-            <span className="text-[10px] uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">
-              {userRole}
-            </span>
-          </div>
-
-          {/* Controls: Theme Toggle + User Info + Logout */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            {/* Switch de Tema */}
-            <ThemeToggle />
-
-            {/* Perfil del Usuario */}
-            <div className="flex items-center space-x-2.5 pl-2 border-l border-slate-200 dark:border-slate-800">
-              {avatarUrl ? (
-                <img
-                  src={avatarUrl}
-                  alt={userName}
-                  className="w-8 h-8 rounded-full border border-emerald-500/30 object-cover"
-                />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                  {userName.charAt(0).toUpperCase()}
-                </div>
-              )}
-              <div className="hidden sm:flex flex-col text-left">
-                <span className="text-xs font-semibold text-[var(--text-main)] leading-tight">
-                  {userName}
-                </span>
-                <span className="text-[10px] text-[var(--text-muted)] truncate max-w-[150px]">
-                  {userEmail}
-                </span>
-              </div>
-            </div>
-
-            {/* Botón Cerrar Sesión con texto Salir e icono */}
-            <form action={logoutAction}>
-              <button
-                type="submit"
-                className="py-1.5 px-3 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-rose-50 dark:bg-slate-800 dark:hover:bg-rose-950/40 border border-slate-300 dark:border-slate-700 text-slate-700 hover:text-rose-600 dark:text-slate-300 dark:hover:text-rose-400 text-xs font-semibold transition-all duration-200 active:scale-95 flex items-center space-x-1.5 cursor-pointer shadow-sm"
-              >
-                <span>Salir</span>
-                <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
-      </header>
+      <DashboardHeader
+        userName={userName}
+        userEmail={userEmail}
+        userRole={userRole}
+        avatarUrl={avatarUrl}
+      />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-8 md:p-10 flex flex-col space-y-8">
@@ -118,7 +84,7 @@ export default function DashboardClient({
 
             {/* Botón Nuevo Evento en la cabecera de Mis Eventos */}
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleOpenCreate}
               className="py-2 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md hover:shadow-emerald-600/20 active:scale-95 flex items-center space-x-1.5 transition-all cursor-pointer"
             >
               <span className="text-sm leading-none">+</span>
@@ -141,7 +107,7 @@ export default function DashboardClient({
                 </p>
               </div>
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleOpenCreate}
                 className="mt-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wide shadow-md active:scale-95 transition-all cursor-pointer"
               >
                 + Crear Mi Primer Evento
@@ -151,7 +117,11 @@ export default function DashboardClient({
             /* EVENTS GRID */
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {events.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  onEdit={handleOpenEdit}
+                />
               ))}
             </div>
           )}
@@ -163,10 +133,11 @@ export default function DashboardClient({
         Smart-Fest &copy; {new Date().getFullYear()} — Plataforma SaaS de Gestión de Eventos
       </footer>
 
-      {/* Modal para Crear Evento */}
+      {/* Modal para Crear / Editar Evento */}
       <CreateEventModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleCloseModal}
+        eventToEdit={eventToEdit}
       />
     </div>
   );
